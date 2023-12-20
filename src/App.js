@@ -31,8 +31,11 @@ import PersonalPapersUser from './Components/UserDashboard/PapersUser/PersonalPa
 import CompanyPapersUser from './Components/UserDashboard/PapersUser/CompanyPapersUser/CompanyPapersUser';
 import AddNewServiesUser from './Components/UserDashboard/ServicesUserDashboard/AddNewServiesUser/AddNewServiesUser';
 import ViewPapers from './Components/UserDashboard/PapersUser/CompanyPapersUser/ViewPapers';
+
+import EditUserAdmin from './Components/AdminDashboard/UserAdminDashboard/EditUserAdmin/EditUserAdmin';
 import ServicesAdminDashboard from './Components/AdminDashboard/ServicesAdminDashboard/AllServices/ServicesAdminDashboard';
 import AddServicesAdminDashboard from './Components/AdminDashboard/ServicesAdminDashboard/AddNewServices/AddNewServices';
+
 // import { ThemeProvider } from 'react-bootstrap';
 // eos
 
@@ -101,8 +104,11 @@ function App() {
         {/* ------------------------ /Dashboard -----------------------------------------*/}
 
         {/* ------------------------ Admin Dashboard -----------------------------------------*/}
-        {login && userRole === 'admin' && <Route path="/useradmindashboard" element={<UserAdminDashboard />} />}
-        {login && userRole === 'admin' && <Route path="/addnewuseradmindashboard" element={<AddNewUserAdmin />} />}
+
+         {login && userRole === 'admin' && <Route path="/useradmindashboard" element={<UserAdminDashboard />} />}
+        {login && userRole === 'admin' &&  <Route path="/addnewuseradmindashboard" element={<AddNewUserAdmin />} />}
+        {login && userRole === 'admin' &&  <Route path="/edituseradmindashboard" element={<EditUserAdmin />} />}
+
 
         {login && userRole === 'admin' && <Route path="/servicesadmindashboard" element={<ServicesAdminDashboard />} />}
         {login && userRole === 'admin' && <Route path="/addnewservicesadmindashboard" element={<AddServicesAdminDashboard />} />}
