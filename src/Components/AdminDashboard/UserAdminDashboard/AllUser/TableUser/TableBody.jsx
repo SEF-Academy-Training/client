@@ -223,4 +223,31 @@ const TableBody = () => {
     ));
 };
 
-export default TableBody;
+
+// export default TableBody;
+// =======
+//   return DataLang.filter((item) =>
+//     item.username.toLowerCase().includes(searchQuery.toLowerCase())
+//   ).map(user => (
+//     <tr key={user.id} >
+//       <td> </td>
+//       <td>{user.id}</td>
+//       <td> </td>
+//       <td>{user.username}</td>
+//       <td>{user.email}</td>
+//       <td>{user.company}</td>
+//       <td>{user.date}</td>
+//       <td className="d-flex">
+//         <Link className="py-1 text-decoration-none text-primary me-2">{user.action[0]}</Link>
+//         <Link className="py-1 text-decoration-none text-danger"
+//           onClick={() => handleDelete(user.id)}
+//         >{user.action[1]}</Link>
+//       </td>
+//     </tr>
+
+//   ));
+  
+// }
+
+// export default TableBody
+

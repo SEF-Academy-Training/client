@@ -12,6 +12,7 @@ const Register = () => {
   const dispatch = useDispatch()  
   const navigate = useNavigate();
 
+
 const {
   register,
   handleSubmit,
@@ -40,6 +41,7 @@ const onSubmit = (data) => {
 }
 }
 /////////////////////////////////////////////
+
 
   const [formData, setFormData] = useState({
     email: '',

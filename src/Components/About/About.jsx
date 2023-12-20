@@ -16,7 +16,6 @@ import prtn5 from '../../assest/images/airaraia.png'
 
 function About() {
 
-
   return (
     <>
       <div id="about" className="font-loader">

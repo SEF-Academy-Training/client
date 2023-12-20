@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify'
 
 const AddUser = () => {
+
     const navigate = useNavigate()
     const { register, handleSubmit, reset,formState: { isSubmitSuccessful } } = useForm(); 
     const onSubmit = (data) => {
@@ -43,6 +44,7 @@ const AddUser = () => {
   
     };
     /////////////////////////
+
     const dispatch = useDispatch()
     const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 

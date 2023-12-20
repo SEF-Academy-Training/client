@@ -48,10 +48,12 @@ const Header = () => {
   const userRole = useSelector((state) => state.UserSlice.userRole);
   const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 
+
   // const handleLogout = () => {
   //   dispatch(setLogout(false));
 
   // };
+
   const onUpdateActiveLink = (value) => {
     // setActiveLink(value);
     dispatch(setActiveLink(value));

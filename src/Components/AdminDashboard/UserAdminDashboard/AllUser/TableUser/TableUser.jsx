@@ -20,12 +20,11 @@ const TableUser = () => {
                     ))}
                 </tr>
             </thead>
-
-
             <tbody className="table-body">
                 <TableBody />
             </tbody>
         </Table>
+        
     )
 }
 

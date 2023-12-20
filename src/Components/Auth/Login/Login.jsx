@@ -32,8 +32,6 @@ const LoginForm = () => {
   const userRole = useSelector((state) => state.UserSlice.userRole);
   const login = useSelector((state) => state.UserSlice.login);
 
-
-
   const [formData, setFormData] = useState({
     email: '',
     password: '',
