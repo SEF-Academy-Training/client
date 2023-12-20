@@ -1,23 +1,31 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Col, Form, Image, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import defultImg from '../../../../assest/images/default-placeholder.png'
+import defaultImg from '../../../../assest/images/default-placeholder.png'
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserProfile } from '../../../../Redux/Reducers/user';
+import { getUserData, updateUserProfile } from '../../../../Redux/Reducers/user';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 const EditProfile = () => {   
+  
   const dispatch = useDispatch();
-	const { user } = useSelector((state) => state.user); 
 
+  const {user } =useSelector((state) => state.user) 
+  useEffect(() => {
+    dispatch(getUserData());
+    },[])
+
+console.log(user);
+console.log(user?.profileImage);
  const [image, setImage] = useState(null);
  const imageInput = useRef();
  const [userProfileImage, setUserProfileImage] = useState(
    user?.profileImage
-     ? `http://localhost:4000/seff-academy/uploads/${user.profileImage}`
-     : 'https://cdn.pixabay.com/photo/2021/07/25/08/03/account-6491185_1280.png'
+     ? `http://localhost:4000/seff-academy/uploads/${user?.profileImage}`
+     : defaultImg
  );
+ 
 
  function imageUpload() {
    imageInput.current.click();
@@ -36,7 +44,7 @@ const EditProfile = () => {
   userEmail: user?.userEmail ?? null, 
   password: user?.password ?? null,
  };
- const onSubmit = (data) => {
+ const onSubmit = (data) => { 
    const filteredData = Object.fromEntries(
      Object.entries(data).filter(([key, value]) => value !== undefined)
    );
@@ -51,7 +59,7 @@ const EditProfile = () => {
      return;
    }
     
-   dispatch(updateUserProfile(filteredData))
+   dispatch(updateUserProfile( filteredData))
      .unwrap()
      .then(() => {
        toast.success('Profile Updated');
@@ -64,18 +72,18 @@ const EditProfile = () => {
     }
  };
   /////////////////////////////////////////////
-  const [selectedImage, setSelectedImage] = useState(null);
+  // const [selectedImage, setSelectedImage] = useState(null);
   // const imageInput = useRef();
 
-  console.log(imageInput.current);
+  // console.log(imageInput.current);
 
-  const handleImageChange = () => {
-    imageInput.current.click();
-  };
+  // const handleImageChange = () => {
+    // imageInput.current.click();
+  // };
 
-  const displayImage = (e) => {
-    setSelectedImage(e.target.files[0]);
-  };
+  // const displayImage = (e) => {
+    // setSelectedImage(e.target.files[0]);
+  // };
 
   return (    
     <div className="container px-5 pb-3" style={{ borderTop: "2px solid rgb(236, 236, 236)" }}>    
@@ -86,21 +94,22 @@ const EditProfile = () => {
           <div className="rounded-circle border shadow-sm m-auto text-center my-2" style={{ width: "200px", height: "200px" }}>
             <input
               type="file"
-              onChange={displayImage}
+              onChange={imageDisplay}
               ref={imageInput}
               className='d-none'
             />
             <Image
-              onClick={handleImageChange}
-              src={(selectedImage && URL.createObjectURL(selectedImage)) || defultImg}
-              alt='defult image'
+              // onClick={handleImageChange}
+              src={userProfileImage|| ''} 
+
+              alt='Image'
               className="pointer rounded-circle" 
               style={{ width: "200px", height: "200px" }}
             />
 
           </div>
           <Col md={12}>
-            <Button onClick={handleImageChange}
+            <Button onClick={imageUpload}
              variant='dark'>Change Profile Picture </Button>
           </Col>
         </Col>
@@ -108,34 +117,35 @@ const EditProfile = () => {
         <Col md={12}>
 
 
-            <Form.Group className="mb-3" controlId="formUsername" defaultValue={initialProfileData.userName}
-									{...register('userName')}>
+            <Form.Group className="mb-3" controlId="formUsername" >
               <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder="Type your username" className='rounded-3 border border-2' />
+              <Form.Control defaultValue={initialProfileData.userName}
+									{...register('userName')} type="text" placeholder="Type your username" className='rounded-3 border border-2' />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formUsername" defaultValue={initialProfileData.company}
-									{...register('company')}>
+            <Form.Group className="mb-3" controlId="formUsername">
               <Form.Label>Company </Form.Label>
-              <Form.Control type="text" placeholder="Type your username" className='rounded-3 border border-2' />
+              <Form.Control  defaultValue={initialProfileData.company}
+									{...register('company')} type="text" placeholder="Type your username" className='rounded-3 border border-2' />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formEmail" defaultValue={initialProfileData.userEmail}
-									{...register('userEmail')}>
+            <Form.Group className="mb-3" controlId="formEmail" >
               <Form.Label>User Email</Form.Label>
-              <Form.Control type="email" placeholder="Type your email" className='rounded-3 border border-2' />
+              <Form.Control defaultValue={initialProfileData.userEmail}
+									{...register('userEmail')} type="email" placeholder="Type your email" className='rounded-3 border border-2' />
             </Form.Group>
             <Row>
-              <Form.Group as={Col} className="mb-3" controlId="formPassword"defaultValue={initialProfileData.password}
-									{...register('password')}>
+              <Form.Group as={Col} className="mb-3" controlId="formPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="*************" />
+                <Form.Control  
+                
+									{...register('password')} type="password" placeholder="*************" />
               </Form.Group>
 
-              <Form.Group as={Col} className="mb-3" controlId="formRepeatPassword"          id="passwordConfirmation"
-              {...register("passwordConfirmation")} >
+              <Form.Group as={Col} className="mb-3"         >
                 <Form.Label>Confirm Password</Form.Label>
-                <Form.Control type="password" placeholder="*************" />
+                <Form.Control id="passwordConfirmation"
+              {...register("passwordConfirmation")} type="password" placeholder="*************" />
               </Form.Group>
             </Row>
 

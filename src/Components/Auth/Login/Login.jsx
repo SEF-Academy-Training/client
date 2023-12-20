@@ -5,7 +5,7 @@ import { errorMsg, successMsg } from '../../Global/Toastify/Toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogin, setUserRole } from '../../../Redux/Reducers/UserSlice';
-import { loginUser } from '../../../Redux/Reducers/authSlice';
+import { loginUser } from '../../../Redux/Reducers/user';
 import { useForm } from "react-hook-form"; 
 
 const LoginForm = () => {

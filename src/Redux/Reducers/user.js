@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Api, { handleApiError } from '../../configs/Api';
 import { toast } from "react-toastify";
+import { errorMsg } from "../../Components/Global/Toastify/Toastify";
 
 export const loginUser = createAsyncThunk(
   "auth/login",
@@ -13,6 +14,26 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+export const logoutUser = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await Api.post("/auth/logout");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const registerUser = createAsyncThunk('auth/register',async(userData,{rejectWithValue})=>{
+  try {
+    const response =await Api.post('/auth/register',userData)
+    return response.data
+  } catch (error) {
+    return rejectWithValue(error.response.data)
+  }
+})
+
 export const currentUser = createAsyncThunk(
   "auth/current-user",
   async (userData, { rejectWithValue }) => {
@@ -78,6 +99,17 @@ export const getUser = createAsyncThunk(
     }
   }
 );
+export const getUserData = createAsyncThunk(
+  "users/getUserData",
+  async (_id, { rejectWithValue }) => {
+    try {
+      const response = await Api.get("/users/get-user");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 export const updateUser = createAsyncThunk(
   "users/update-by-admin",
   async ({ _id, userData }, { rejectWithValue }) => {
@@ -125,19 +157,21 @@ const user = createSlice({
         state.loading = true;
         state.error = null;
       })
+      .addCase(getUserData.fulfilled, (state, { payload }) => {
+        state.user = payload.data;
+        state.isAuthenticated=true;
+      }) 
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.success = true;
         state.isAuthenticated = true;
         state.user = payload.data;
-      })
-      .addCase(currentUser.fulfilled, (state, { payload }) => {
-        // console.log("currentUser",payload);
-        state.loading = false;
-        state.success = true;
-        state.isAuthenticated = true;
-        state.user = payload.data;
-      })
+        console.log(state.user);
+        console.log(state.user.role);
+        console.log(state.isAuthenticated)
+
+      
+      })      
       .addCase(loginUser.rejected, (state, { payload }) => {
         state.loading = false;
         if (payload) {
@@ -154,6 +188,48 @@ const user = createSlice({
           state.error = "Network error occurred";
         }
       })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.isAuthenticated = false;
+        state.user = null;
+      })
+      .addCase(logoutUser.rejected, (state, { payload }) => {
+        // Handle logout error if needed
+        console.error("Logout error:", payload);
+      })
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true
+        state.error = null
+    })
+    .addCase(registerUser.fulfilled, (state, { payload }) => {
+        state.loading = false
+        state.success = true
+        state.isAuthenticated = true
+        state.user= payload.data
+    })            
+    .addCase(registerUser.rejected, (state,{payload} ) => {
+        state.loading = false;
+        if (payload) {
+            if (Array.isArray(payload.error)) {
+                console.log(payload.error);
+                payload.error.map(err => errorMsg(err.message));
+            } else if (payload.success === false && payload.error) {
+                state.error = payload.error;
+                state.success = payload.success;
+            } else {
+                state.error = "An unknown error occurred";
+            }
+        } else {
+            state.error = "Network error occurred";
+        }
+    })
+      .addCase(currentUser.fulfilled, (state, { payload }) => {
+        // console.log("currentUser",payload);
+        state.loading = false;
+        state.success = true;
+        state.isAuthenticated = true;
+        state.user = payload.data;
+      })
+
       .addCase(currentUser.rejected, (state, { payload }) => {
         console.log("currentUser error", payload);
         state.error = payload.error;

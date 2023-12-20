@@ -3,22 +3,22 @@ import Api, { handleApiError } from '../../configs/Api';
 import { createSlice } from "@reduxjs/toolkit"
 import { toast } from "react-toastify"
 import { errorMsg } from "../../Components/Global/Toastify/Toastify";
-export const loginUser = createAsyncThunk('auth/login',async(userData,{rejectWithValue})=>{
-  try {
-    const response =await Api.post('/auth/login',userData)
-    return response.data
-  } catch (error) {
-    return rejectWithValue(error.response.data)
-  }
-})
-export const registerUser = createAsyncThunk('auth/register',async(userData,{rejectWithValue})=>{
-    try {
-      const response =await Api.post('/auth/register',userData)
-      return response.data
-    } catch (error) {
-      return rejectWithValue(error.response.data)
-    }
-  })
+// export const loginUser = createAsyncThunk('auth/login',async(userData,{rejectWithValue})=>{
+//   try {
+//     const response =await Api.post('/auth/login',userData)
+//     return response.data
+//   } catch (error) {
+//     return rejectWithValue(error.response.data)
+//   }
+// })
+// export const registerUser = createAsyncThunk('auth/register',async(userData,{rejectWithValue})=>{
+//     try {
+//       const response =await Api.post('/auth/register',userData)
+//       return response.data
+//     } catch (error) {
+//       return rejectWithValue(error.response.data)
+//     }
+//   })
 export const currentUser = createAsyncThunk('auth/current-user',async(userData,{rejectWithValue})=>{
   try {
     const response =await Api.post('/auth/current-user')
@@ -39,58 +39,59 @@ const authSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(loginUser.pending, (state) => {
-                state.loading = true
-                state.error = null
-            })
-            .addCase(loginUser.fulfilled, (state, { payload }) => {
-                state.loading = false
-                state.success = true
-                state.isAuthenticated = true
-                state.user= payload.data
-            })            
-            .addCase(loginUser.rejected, (state,{payload} ) => {
-                state.loading = false;
-                if (payload) {
-                    if (Array.isArray(payload.error)) {
-                        console.log(payload.error);
-                        payload.error.map(err => toast.error(err.message));
-                    } else if (payload.success === false && payload.error) {
-                        state.error = payload.error;
-                        state.success = payload.success;
-                    } else {
-                        state.error = "An unknown error occurred";
-                    }
-                } else {
-                    state.error = "Network error occurred";
-                }
-            })
-            .addCase(registerUser.pending, (state) => {
-                state.loading = true
-                state.error = null
-            })
-            .addCase(registerUser.fulfilled, (state, { payload }) => {
-                state.loading = false
-                state.success = true
-                state.isAuthenticated = true
-                state.user= payload.data
-            })            
-            .addCase(registerUser.rejected, (state,{payload} ) => {
-                state.loading = false;
-                if (payload) {
-                    if (Array.isArray(payload.error)) {
-                        console.log(payload.error);
-                        payload.error.map(err => errorMsg(err.message));
-                    } else if (payload.success === false && payload.error) {
-                        state.error = payload.error;
-                        state.success = payload.success;
-                    } else {
-                        state.error = "An unknown error occurred";
-                    }
-                } else {
-                    state.error = "Network error occurred";
-                }
-            })
+            // .addCase(loginUser.pending, (state) => {
+            //     state.loading = true
+            //     state.error = null
+            // })
+            // .addCase(loginUser.fulfilled, (state, { payload }) => {
+            //     state.loading = false
+            //     state.success = true
+            //     state.isAuthenticated = true
+            //     state.user= payload.data
+            //     console.log(payload.data);
+            // })            
+            // .addCase(loginUser.rejected, (state,{payload} ) => {
+            //     state.loading = false;
+            //     if (payload) {
+            //         if (Array.isArray(payload.error)) {
+            //             console.log(payload.error);
+            //             payload.error.map(err => toast.error(err.message));
+            //         } else if (payload.success === false && payload.error) {
+            //             state.error = payload.error;
+            //             state.success = payload.success;
+            //         } else {
+            //             state.error = "An unknown error occurred";
+            //         }
+            //     } else {
+            //         state.error = "Network error occurred";
+            //     }
+            // })
+            // .addCase(registerUser.pending, (state) => {
+            //     state.loading = true
+            //     state.error = null
+            // })
+            // .addCase(registerUser.fulfilled, (state, { payload }) => {
+            //     state.loading = false
+            //     state.success = true
+            //     state.isAuthenticated = true
+            //     state.user= payload.data
+            // })            
+            // .addCase(registerUser.rejected, (state,{payload} ) => {
+            //     state.loading = false;
+            //     if (payload) {
+            //         if (Array.isArray(payload.error)) {
+            //             console.log(payload.error);
+            //             payload.error.map(err => errorMsg(err.message));
+            //         } else if (payload.success === false && payload.error) {
+            //             state.error = payload.error;
+            //             state.success = payload.success;
+            //         } else {
+            //             state.error = "An unknown error occurred";
+            //         }
+            //     } else {
+            //         state.error = "Network error occurred";
+            //     }
+            // })
             .addCase(currentUser.fulfilled, (state, { payload }) => {
                 // console.log("currentUser",payload);
                 state.loading = false

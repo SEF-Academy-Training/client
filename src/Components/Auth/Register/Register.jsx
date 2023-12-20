@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { errorMsg, successMsg } from '../../Global/Toastify/Toastify';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../../../Redux/Reducers/authSlice';
+import { registerUser } from '../../../Redux/Reducers/user';
 import { useForm } from "react-hook-form"; 
 import { useDispatch, useSelector } from 'react-redux';
 

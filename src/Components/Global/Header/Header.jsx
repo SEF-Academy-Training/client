@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Container, Dropdown, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import logoForLight from '../../../assest/images/Logo Text.png'
@@ -10,6 +10,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { setActiveLink } from '../../../Redux/Reducers/GlobalSlice';
 import { NavbarData } from '../../DummyData/DummyData';
 import { setLogin, setLogout } from '../../../Redux/Reducers/UserSlice';
+import Api from '../../../configs/Api';
+import { getUserData, logoutUser } from '../../../Redux/Reducers/user';
 
 /*
 npm install i18next react-i18next
@@ -18,23 +20,38 @@ npm install i18next react-i18next
 
 const Header = () => {
 
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {user ,isAuthenticated} =useSelector((state) => state.user) 
+  const handleLogout = async () => {
+    try {
+      await dispatch(logoutUser());
+     } catch (error) {
+       console.error("Logout error:", error)
+    }
+  };
+
+  useEffect(() => {
+  dispatch(getUserData());
+  },[])
+/////////////////////////////////////////////////
   const activeLink = useSelector((state) => state.GlobalSlice.activeLink);
 
   const [showDropdown, setShowDropdown] = useState(false);
 
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState('en');
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
 
   const login = useSelector((state) => state.UserSlice.login);
   const userRole = useSelector((state) => state.UserSlice.userRole);
   const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 
-  const handleLogout = () => {
-    dispatch(setLogout(false));
+  // const handleLogout = () => {
+  //   dispatch(setLogout(false));
 
-  };
+  // };
   const onUpdateActiveLink = (value) => {
     // setActiveLink(value);
     dispatch(setActiveLink(value));
@@ -60,7 +77,7 @@ const Header = () => {
     navigate('/register');
   };
   const handleDashboard = () => {
-    userRole == 'admin' ? navigate('/useradmindashboard'):navigate('/servicesuserdashboard')
+    user.role == 'Admin' ? navigate('/useradmindashboard'):navigate('/servicesuserdashboard')
   }
 
   return (
@@ -91,7 +108,7 @@ const Header = () => {
 
             <Nav className=" align-items-center">
 
-              {!login ? (<>
+              {!isAuthenticated ? (<>
                 <Button className='bg-light text-primary px-4' onClick={handleLogin}>{t('Login')}</Button>
                 <Button className='px-4 mx-2' onClick={handleSignUp}>{t('SignUp')}</Button>
               </>
