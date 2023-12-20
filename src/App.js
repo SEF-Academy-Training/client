@@ -32,6 +32,7 @@ import PersonalPapersUser from './Components/UserDashboard/PapersUser/PersonalPa
 import CompanyPapersUser from './Components/UserDashboard/PapersUser/CompanyPapersUser/CompanyPapersUser';
 import AddNewServiesUser from './Components/UserDashboard/ServicesUserDashboard/AddNewServiesUser/AddNewServiesUser';
 import ViewPapers from './Components/UserDashboard/PapersUser/CompanyPapersUser/ViewPapers';
+import EditUserAdmin from './Components/AdminDashboard/UserAdminDashboard/EditUserAdmin/EditUserAdmin';
 // import { ThemeProvider } from 'react-bootstrap';
 // eos
 
@@ -102,6 +103,7 @@ function App() {
         {/* ------------------------ Admin Dashboard -----------------------------------------*/}
         <Route path="/useradmindashboard" element={<UserAdminDashboard />} />
         <Route path="/addnewuseradmindashboard" element={<AddNewUserAdmin />} />
+        <Route path="/edituseradmindashboard" element={<EditUserAdmin />} />
 
         <Route path="/servicesadmindashboard" element={<ServicesAdminDashboard />} />
 

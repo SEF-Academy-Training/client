@@ -5,14 +5,34 @@ import { errorMsg, successMsg } from '../../Global/Toastify/Toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogin, setUserRole } from '../../../Redux/Reducers/UserSlice';
+import { loginUser } from '../../../Redux/Reducers/authSlice';
+import { useForm } from "react-hook-form"; 
 
 const LoginForm = () => {
+
+    const dispatch = useDispatch()  
+    const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+  } = useForm();
+  const {loading} =useSelector((state) => state.user)
+  const onSubmit = (data) => {
+    dispatch(loginUser(data))
+    .unwrap()
+    .then(() => {
+      navigate("/");
+    })
+    .catch((backendError) => {
+      errorMsg(backendError.error);
+    });
+  }
+  ////////////////////////////////////
   const userRole = useSelector((state) => state.UserSlice.userRole);
   const login = useSelector((state) => state.UserSlice.login);
 
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -22,37 +42,37 @@ const LoginForm = () => {
   const [validated, setValidated] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const form = e.currentTarget;
   
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-      setValidated(true);
-      errorMsg('Please fill in all required fields correctly.');
-      return;
-    }
+  //   if (form.checkValidity() === false) {
+  //     e.stopPropagation();
+  //     setValidated(true);
+  //     errorMsg('Please fill in all required fields correctly.');
+  //     return;
+  //   }
   
-    setValidated(true);
+  //   setValidated(true);
   
-    const { email, password } = formData;
+  //   const { email, password } = formData;
   
-    const isAdminEmail = email === 'admin@gmail.com';
-    const isCorrectPassword = password === '2212';
+  //   const isAdminEmail = email === 'admin@gmail.com';
+  //   const isCorrectPassword = password === '2212';
   
-    if (isAdminEmail && isCorrectPassword) {
-      dispatch(setUserRole('admin'));
-      // console.log(userRole);
-    } else {
-      dispatch(setUserRole('user'));
-      // console.log(userRole);
+  //   if (isAdminEmail && isCorrectPassword) {
+  //     dispatch(setUserRole('admin'));
+  //     // console.log(userRole);
+  //   } else {
+  //     dispatch(setUserRole('user'));
+  //     // console.log(userRole);
 
-    }
+  //   }
   
-    dispatch(setLogin(true));
-    navigate('/');
-    successMsg('Login successful!');
-  };
+  //   dispatch(setLogin(true));
+  //   navigate('/');
+  //   successMsg('Login successful!');
+  // };
   
 
   const handleChange = (e) => {
@@ -77,7 +97,8 @@ const LoginForm = () => {
   };
 
   return (
-    <Form className="my-5 w-75 rounded m-auto bg-light p-5" onSubmit={handleSubmit} validated={validated}>
+    <Form className="my-5 w-75 rounded m-auto bg-light p-5" onSubmit={handleSubmit(onSubmit)} validated={validated}>
+    {/* <Form className="my-5 w-75 rounded m-auto bg-light p-5" onSubmit={handleSubmit} validated={validated}> */}
       <div className="container px-5 py-4">
         <div className='p-5 border rounded-5'>
           <Form.Group className="mb-3">
@@ -85,10 +106,12 @@ const LoginForm = () => {
             <Form.Control
               type="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
+              // value={formData.email}
+              // onChange={handleChange}              
+              // isInvalid={validated && !formData.email}
+              {...register("userEmail")}
+
               required
-              isInvalid={validated && !formData.email}
             />
             <Form.Control.Feedback type="invalid">Please enter a valid email.</Form.Control.Feedback>
           </Form.Group>
@@ -98,10 +121,11 @@ const LoginForm = () => {
             <Form.Control
               type={showPassword ? 'text' : 'password'}
               name="password"
-              value={formData.password}
-              onChange={handleChange}
+              // value={formData.password}
+              // onChange={handleChange}              
+              // isInvalid={validated && !formData.password}
+              {...register("password")}
               required
-              isInvalid={validated && !formData.password}
             />
             <div
               className="login_right-icon clickable position-absolute"
