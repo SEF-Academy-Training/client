@@ -1,13 +1,13 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import AdminDashboardSideBar from '../../AdminDashboardGlobal/AdminDashboardSideBar'
-import BlogsContent from './BlogsContent'
 import PaginationBar from '../../../Global/PaginationBar'
 import DashboardHeader from '../../../Global/Dashboard/DashboardHeader/DashboardHeader'
 import { useSelector } from 'react-redux'
+import AddService from './AddService'
 
 
-const BlogsAdminDashboard = () => {
+const AddServicesAdminDashboard = () => {
     const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 
     return (
@@ -24,9 +24,8 @@ const BlogsAdminDashboard = () => {
                     <div style={{ paddingRight: '50px' }}>
                         <div className={`bg-light my-5 rounded-5 ${toggleDark ? 'bg-dark text-light border' : 'bg-light text-dark'}`}
                         >
-                            <DashboardHeader pageTitle={'Add New Blog'} />
-                            {/* <TableUser /> */}
-                           <BlogsContent/>
+                            <DashboardHeader pageTitle={'Add New Services'} display={'display'} />
+                           <AddService/>
                             <PaginationBar />
 
                         </div>
@@ -37,4 +36,4 @@ const BlogsAdminDashboard = () => {
         </Container>)
 }
 
-export default BlogsAdminDashboard
+export default AddServicesAdminDashboard

@@ -53,9 +53,9 @@ export const AdminSidebarData = [
     id: 23,
     title: 'Services',
     titleAr: 'الخدمات',
-    path: ['/servicesadmindashboard', '/servicesadmindashboard', '/servicesadmindashboard'],
-    data: ['Unread', 'Ongoing', 'All Services'],
-    dataAr: ['غير مقروء', ' جاري', 'جميع الخدمات'],
+    path: ['/servicesadmindashboard', '/servicesadmindashboard', '/servicesadmindashboard','/addnewservicesadmindashboard'],
+    data: ['Unread', 'Ongoing', 'All Services','Add New Services'],
+    dataAr: ['غير مقروء', ' جاري', 'جميع الخدمات' ,'اضافه خدمه جديده'],
   },
   {
     id: 24,
@@ -202,22 +202,7 @@ export const ServicesData = [
     action: ["completed"],
 
   },
-  {
-    id: "07",
-    title: 'Services',
-    tilteAr: 'خدمات',
-    service: "payroll tax",
-    servicesAr: 'ضريبة المرتبات',
-    user: 'Taxes',
-    userAr: 'الضرائب',
-    SerialCode: "#123-456ABV",
-    uploadDate: "12-12-2025",
-    date: "12-12-2025",
-    action: ["Add milestone", "Delete"],
-    actionAr: ['إضافة معلم', 'حذف']
-
-
-  },
+ 
 ];
 
 export const UsersDataHeader = [
@@ -498,6 +483,12 @@ export const BlogData = [
 ]
 
 export const ServicesDataHeaderUserDashboard = [
+  
+  {
+    id: 98,
+    title: '',
+    titleAr: ''
+  },
   {
     id: 99,
     title: '',
@@ -540,6 +531,7 @@ export const ServicesDataHeaderUserDashboard = [
   },
 ];
 export const ServicesDataUserDashboard = [
+  
   {
     id: "01",
     service: "VAT",
@@ -619,20 +611,7 @@ export const ServicesDataUserDashboard = [
     actionAddAr: 'إضافة',
 
   },
-  {
-    id: "07",
-    service: "payroll tax",
-    servicesAr: 'ضريبة المرتبات',
-    SerialCode: "#123-456ABV",
-    lastUpdate: "12-12-2025",
-    date: "12-12-2025",
-    actionAdd: 'Add',
-    actionAddAr: 'إضافة',
-    actionAr: 'تفاصيل',
-    action: 'details'
 
-
-  },
 ];
 
 export const PersonalPapersHeader = [

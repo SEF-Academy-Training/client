@@ -22,7 +22,6 @@ import Chat from './Components/Chat/Chat';
 import SingleBlog from './Components/Blogs/SingleBlog';
 import Home from './Components/Home/Home';
 import UserAdminDashboard from './Components/AdminDashboard/UserAdminDashboard/AllUser/UserAdminDashboard';
-import ServicesAdminDashboard from './Components/AdminDashboard/ServicesAdminDashboard/ServicesAdminDashboard';
 import BlogsAdminDashboard from './Components/AdminDashboard/BlogsAdminDashboard/AllNewBlog/BlogsAdminDashboard';
 import AddNewUserAdmin from './Components/AdminDashboard/UserAdminDashboard/AddUserAdmin/AddNewUserAdmin';
 import AddNewBlogAdmin from './Components/AdminDashboard/BlogsAdminDashboard/AddNewBlogAdmin/AddNewBlogAdmin';
@@ -32,6 +31,8 @@ import PersonalPapersUser from './Components/UserDashboard/PapersUser/PersonalPa
 import CompanyPapersUser from './Components/UserDashboard/PapersUser/CompanyPapersUser/CompanyPapersUser';
 import AddNewServiesUser from './Components/UserDashboard/ServicesUserDashboard/AddNewServiesUser/AddNewServiesUser';
 import ViewPapers from './Components/UserDashboard/PapersUser/CompanyPapersUser/ViewPapers';
+import ServicesAdminDashboard from './Components/AdminDashboard/ServicesAdminDashboard/AllServices/ServicesAdminDashboard';
+import AddServicesAdminDashboard from './Components/AdminDashboard/ServicesAdminDashboard/AddNewServices/AddNewServices';
 // import { ThemeProvider } from 'react-bootstrap';
 // eos
 
@@ -96,32 +97,47 @@ function App() {
         {/* ------------------------- Dashboard -----------------------------------------*/}
         {/* {login && userRole === 'admin' && <Route path="/admindashboard" element={<AdminDashboard />} />} */}
 
-        <Route path="/settingsdashboard" element={<SettingAdminDashboard />} />
+        {login && <Route path="/settingsdashboard" element={<SettingAdminDashboard />} />}
         {/* ------------------------ /Dashboard -----------------------------------------*/}
 
         {/* ------------------------ Admin Dashboard -----------------------------------------*/}
-        <Route path="/useradmindashboard" element={<UserAdminDashboard />} />
-        <Route path="/addnewuseradmindashboard" element={<AddNewUserAdmin />} />
+        {login && userRole === 'admin' && <Route path="/useradmindashboard" element={<UserAdminDashboard />} />}
+        {login && userRole === 'admin' && <Route path="/addnewuseradmindashboard" element={<AddNewUserAdmin />} />}
 
-        <Route path="/servicesadmindashboard" element={<ServicesAdminDashboard />} />
+        {login && userRole === 'admin' && <Route path="/servicesadmindashboard" element={<ServicesAdminDashboard />} />}
+        {login && userRole === 'admin' && <Route path="/addnewservicesadmindashboard" element={<AddServicesAdminDashboard />} />}
 
 
-        <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />
-        <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />
-
+        {login && userRole === 'admin' && <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />}
+        {login && userRole === 'admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />}
 
         {/* ------------------------- /Admin Dashboard -----------------------------------------*/}
 
         {/* ------------------------- User Dashboard -----------------------------------------*/}
-        <Route path="/servicesuserdashboard" element={<ServicesUserDashboard />} />
-        <Route path="/personalpapersuser" element={< PersonalPapersUser/>} />
-        <Route path="/companypapersuser" element={<CompanyPapersUser />} />
-        <Route path="/addnewserviesuser" element={< AddNewServiesUser/>} />
-        <Route path="/viewpapers" element={< ViewPapers/>} />
+        {login && userRole === 'user' && <Route path="/servicesuserdashboard" element={<ServicesUserDashboard />} />}
+        {login && userRole === 'user' && <Route path="/personalpapersuser" element={< PersonalPapersUser />} />}
+        {login && userRole === 'user' && <Route path="/companypapersuser" element={<CompanyPapersUser />} />}
+        {login && userRole === 'user' && <Route path="/addnewserviesuser" element={< AddNewServiesUser />} />}
+        {login && userRole === 'user' && <Route path="/viewpapers" element={< ViewPapers />} />}
 
-        {/* ViewPapers */}
         {/* ------------------------ /User Dashboard -----------------------------------------*/}
 
+
+{/*
+1- conditions for routes 
+2- logout for user dashboard and admin dashboard
+3- create new folder in admin dashoard (AllServices) and move old folders and file for it ---> and Edit paths in there files and App.js file
+4- create new servies for admin dashboard
+5-  edit title header for BlogsAdminDashboard file from (all blogs) to (add new blog)
+6- pass pram (display={'display'}) to DashboardHeader component (as hide sort and search inputs for add new) in BlogsAdminDashboard file
+7- pass pram (display={'display'}) to DashboardHeader component in AddNewServiesUser file
+8- change this condition (${toggleDark ? 'bg-dark text-light' : 'bg-light text-light'}`)
+                      to (${toggleDark ? 'bg-dark text-light' : 'bg-light text-dark'}`)
+9- move the curly bracket to validate the previous condation 
+10- selected options for services for user dashboard 
+
+*/}
+        
       </Routes>
     </ThemeProvider>
   );

@@ -4,11 +4,10 @@ import { Button, Card, Col, Form, Image, Row } from 'react-bootstrap';
 import { FaUpload } from 'react-icons/fa';
 import defultImg from '../../../../assest/images/Vector.svg'
 
-const AddBlog = () => {
+const AddService = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const imageInput = useRef();
-
-    console.log(imageInput.current);
+    const [selectedCategories, setSelectedCategories] = useState([]);
 
     const handleImageChange = () => {
         imageInput.current.click();
@@ -16,6 +15,17 @@ const AddBlog = () => {
 
     const displayImage = (e) => {
         setSelectedImage(e.target.files[0]);
+    };
+    const handleCategoryChange = (e) => {
+        const selectedOption = e.target.value;
+        const isChecked = e.target.checked;
+
+        if (isChecked) {
+            setSelectedCategories([...selectedCategories, selectedOption]);
+        } else {
+            const updatedCategories = selectedCategories.filter((category) => category !== selectedOption);
+            setSelectedCategories(updatedCategories);
+        }
     };
 
     return (
@@ -31,13 +41,11 @@ const AddBlog = () => {
                                 <Form.Control type="text" placeholder="Your blog title" className="border-2" />
                             </Form.Group>
 
-                            <Form.Group as={Col} controlId="formTag">
-                                <Form.Label>Tags</Form.Label>
-                                <Form.Control type="text" placeholder="Enter tags" className="border-2" />
-                            </Form.Group>
+
                         </Row>
 
                         <Row className="mb-3 pt-3">
+
                             <Form.Group style={{ height: "200px" }} as={Col} controlId="formPhoto">
                                 <Form.Label>Upload Photo</Form.Label>
                                 <input
@@ -55,30 +63,46 @@ const AddBlog = () => {
 
                                 />
                             </Form.Group>
-
+                            <Form.Group as={Col} controlId="formTag">
+                                <Form.Label>Tags</Form.Label>
+                                <Form.Control type="text" placeholder="Enter tags" className="border-2" />
+                            </Form.Group>
+                        </Row>
+                        <Row className="mb-3 pt-3">
                             <Form.Group as={Col} controlId="formCategories">
-                                <Form.Label>Categories</Form.Label>
-                                <Form.Control type="text" placeholder="Your blog categories" className="border-2" />
-                            </Form.Group> 
-                     
-                             {/* <Form.Group as={Col} controlId="formCategories">
                                 <Form.Label>Categories</Form.Label>
                                 <Form.Select className="border-2">
                                     <option value="">Select...</option>
-                                    <option value="tech">Tech</option>
-                                    <option value="business">Business</option>
-                                    <option value="security">Security</option>
-                                    <option value="sports">Sports</option>
-                                    <option value="medical">Medical</option>
-                                    <option value="startups">Startups</option>
-                                    <option value="about">About</option>
+                                    <option value="personal">Personal Paper</option>
+                                    <option value="company">Company Paper</option>
                                 </Form.Select>
-                            </Form.Group> */}
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formCategories">
+                                <Form.Label>Papers Required</Form.Label>
+                                <Form.Check
+                                    type="checkbox"
+                                    label="Option1"
+                                    value="Option1"
+                                    checked={selectedCategories.includes("Option1")}
+                                    onChange={handleCategoryChange}
+                                    className='text-danger'
+                                />
+                                <Form.Check
+                                    type="checkbox"
+                                    label="Option2 "
+                                    value="Option2"
+                                    checked={selectedCategories.includes("Option2")}
+                                    onChange={handleCategoryChange}
+                                    className='text-danger'
+
+                                />
+                            </Form.Group>
                         </Row>
 
-                        <Form.Group className="mb-3" controlId="FormTextarea">
-                            <Form.Label>Write down your blog</Form.Label>
-                            <Form.Control as="textarea" rows={7} placeholder="Your blog" className="border-2" />
+                        <Form.Group className="my-4" controlId="FormTextarea">
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control as="textarea" rows={7} placeholder="Descripte the services" className="border-2" />
                         </Form.Group>
 
                         <div className="w-25 m-auto">
@@ -101,4 +125,4 @@ const AddBlog = () => {
     );
 };
 
-export default AddBlog;
+export default AddService;
