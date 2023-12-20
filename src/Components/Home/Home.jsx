@@ -21,7 +21,7 @@ const Home = () => {
     <div style={{ fontFamily: 'ZCOOL XiaoWei, sans-serif' }}>
       <MainSection />
       {/* ------- */}
-      <div className="container-our-value w-100">
+      {/* <div className="container-our-value w-100">
         <div className="rate-our-values m-auto d-flex justify-content-around mb-5 border-secondary-subtle rounded-4">
           <div className="rate-one text-lg-center">
             <Counter endValue={30} name={"Years of Experience"} />
@@ -30,9 +30,9 @@ const Home = () => {
           </div>
         </div>
         <OurValues />
-      </div>
+      </div> */}
 
-      <section className="our-services">
+      {/* <section className="our-services">
         <h1 className="fs-1 text-lg-center py-5 text-our-services">OUR SERVICES</h1>
         <Container>
           <Row xs={1} md={3} className="g-4">
@@ -47,9 +47,9 @@ const Home = () => {
             <Link to="/contact" className="btn btn-primary text-decoration-none rounded-pill px-5 my-3" style={{ fontSize: "26px" }}>Contact Us</Link>
           </div>
         </Container>
-      </section>
+      </section> */}
 
-      <section className="sponserd">
+      {/* <section className="sponserd">
         <Container>
           <Row className="align-items-center">
             <Col xs={12} sm={4}>
@@ -72,35 +72,8 @@ const Home = () => {
             </Col>
           </Row>
         </Container>
-      </section>
-      <ExploreBlogs />
-      {/* <div className="container">
-        <section className="our-latest-blogs mt-5">
-          <h1 className="fs-1">Explore our Latest Blogs</h1>
-          <div className="row row-cols-1 row-cols-md-3 g-4 mt-2">
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-
-          </div>
-          <div className="mt-3" style={{ float: "right" }}>
-            <Link to="/allblog" className="text-decoration-none fs-5 text-dark">View All <i class="fas fa-chevron-right"></i></Link>
-          </div>
-        </section>
-        <section className="question mb-5" style={{ marginTop: "11rem" }}>
-          <div className="container-question">
-            <div className="card bg-dark text-white rounded-5">
-              <img src={lastImg} className="card-img" alt="..." />
-              <div className="card-img-overlay">
-                <ul className="d-flex justify-content-around mt-3">
-                  <li><h1 className="card-text-question  mt-lg-4">Have AQuestion?Let's Have A TalkTogether</h1></li>
-                  <li><input className="btn btn-primary btn-question m-auto mt-lg-5 rounded-4 w-auto pe-5 ps-5 p-2 fs-5 " type="submit" value="Contact Us" /></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div> */}
+      </section> */}
+      {/* <ExploreBlogs /> */}
     </div >
   );
 }

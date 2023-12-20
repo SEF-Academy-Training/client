@@ -57,6 +57,7 @@ const BlogsContent = () => {
                         <Card className={`rounded-4 my-4 ${toggleDark ? 'bg-dark text-light' : 'bg-light text-dark'}`} style={{ border: "1px solid rgb(55, 182, 255)" }}>
                             <Image fluid src={itm.img} alt="photo" className="card-img-top" />
                             <Card.Body>
+                                
                                 <Card.Title className="mb-3 fw-bold">{itm.title}</Card.Title>
                                 <Card.Text className="lh-1 small">
                                     {itm.blog}
@@ -78,6 +79,7 @@ const BlogsContent = () => {
                                         </Card.Link>
                                     </div>
                                 </div>
+
                             </Card.Body>
                         </Card>
                     </Col>))}

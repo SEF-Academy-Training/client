@@ -17,9 +17,7 @@ const AddNewUserAdmin = () => {
             <AdminDashboardSideBar />
           </div>
         </Col>
-
-
-        <Col sm={9}>
+       <Col sm={9}>
           <div style={{ paddingRight: '50px' }}>
             <div className={`my-5 rounded-5 ${toggleDark ? 'bg-dark text-light border' : ''}`}>
               <DashboardHeader pageTitle={'Add New User'} display={'display'} />

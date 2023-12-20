@@ -29,8 +29,6 @@ const TableServices = () => {
                     ))}
                 </tr>
             </thead>
-
-
             <tbody className="table-body">
                 <TableBody />
             </tbody>

@@ -44,6 +44,7 @@ const TableBody = () => {
           'action': servData.actionAr
         };
       }
+
       return servData;
     });
 
@@ -75,7 +76,6 @@ const TableBody = () => {
           <Link className={`py-1 text-decoration-none me-2 ${service.action[0] === 'completed' ? 'text-success fw-bold' : ''}`}>
             {service.action[0]}
           </Link>
-
 
           <Link className="py-1 text-decoration-none mx-3 text-danger"
             onClick={() => handleDelete(service.id)}

@@ -18,8 +18,6 @@ const AddServicesAdminDashboard = () => {
                         <AdminDashboardSideBar />
                     </div>
                 </Col>
-
-
                 <Col sm={9}>
                     <div style={{ paddingRight: '50px' }}>
                         <div className={`bg-light my-5 rounded-5 ${toggleDark ? 'bg-dark text-light border' : 'bg-light text-dark'}`}
@@ -27,9 +25,9 @@ const AddServicesAdminDashboard = () => {
                             <DashboardHeader pageTitle={'Add New Services'} display={'display'} />
                            <AddService/>
                             <PaginationBar />
-
                         </div>
                     </div>
+                    
                 </Col>
             </Row>
 

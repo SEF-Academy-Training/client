@@ -3,7 +3,7 @@
     height: 100vh;
     background-image: url('../../assest/images/group-diverse-people-having-business-meeting 2.png');
     background-size: cover;
-    background-position: center;
+    /* background-position: center; */
     position: relative;
 
 }
@@ -17,10 +17,14 @@
 }
 
 .p-content-main {
-    font-size: 2.2rem;
+    font-size: 32px;
 }
-
-
+.title-content-main{
+    font-size: 72px;
+}
+.btn-content-main{
+    font-size: 1.5rem;
+}
 
 .btnmain:hover {
     opacity: 0.5;

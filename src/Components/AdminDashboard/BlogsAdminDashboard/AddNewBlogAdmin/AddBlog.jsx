@@ -20,7 +20,6 @@ const AddBlog = () => {
 
     return (
 
-
         <div className="container px-5 pb-4" style={{ borderTop: "2px solid rgb(236, 236, 236)" }}>
             <Row className="px-3 mt-3 rounded border rounded-4">
                 <Col md={12}>
@@ -52,7 +51,6 @@ const AddBlog = () => {
                                     alt='defult image'
                                     className="pointer"
                                     style={{ height: '70%' }}
-
                                 />
                             </Form.Group>
 
