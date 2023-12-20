@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { setActiveLink } from '../../../../Redux/Reducers/AdminSlice'
 
 const AddUser = () => {
+    
     const dispatch = useDispatch()
     const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 

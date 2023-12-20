@@ -38,6 +38,6 @@ code {
 .display {
   display: none;
 }
-/* .Toastify .Toastify__toast-container{
-  z-index: 10000000000000px !important;
-} */
+tbody .selectedRow td {
+  background-color: #f0f8ff; 
+}

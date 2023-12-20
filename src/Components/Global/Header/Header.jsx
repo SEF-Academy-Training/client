@@ -32,8 +32,8 @@ const Header = () => {
   const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 
   const handleLogout = () => {
+    navigate('/')
     dispatch(setLogout(false));
-
   };
   const onUpdateActiveLink = (value) => {
     // setActiveLink(value);

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { infoMsg } from '../../../Global/Toastify/Toastify';
-import { deleteService } from '../../../../Redux/Reducers/AdminSlice';
+import { infoMsg } from '../../../../Global/Toastify/Toastify';
+import { deleteService } from '../../../../../Redux/Reducers/AdminSlice';
+
 
 
 const TableBody = () => {
@@ -43,6 +44,7 @@ const TableBody = () => {
           'action': servData.actionAr
         };
       }
+
       return servData;
     });
 
@@ -74,7 +76,6 @@ const TableBody = () => {
           <Link className={`py-1 text-decoration-none me-2 ${service.action[0] === 'completed' ? 'text-success fw-bold' : ''}`}>
             {service.action[0]}
           </Link>
-
 
           <Link className="py-1 text-decoration-none mx-3 text-danger"
             onClick={() => handleDelete(service.id)}
