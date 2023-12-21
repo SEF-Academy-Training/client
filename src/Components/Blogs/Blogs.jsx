@@ -1,24 +1,49 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Blogs.css';
 import MainTitle from './MainTitle';
 import BlogCard from './BlogCard';
 import BlogsFeatured from '../../assest/images/Blogs Featured Image.png';
+import imgPlaceholder from '../../assest/images/default-placeholder.png';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CTA from '../Global/CTA/CTA';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllBlogs, getOneBlog } from '../../Redux/Reducers/BlgSlice';
+import { deleteBlog, getAllBlogs } from '../../Redux/Reducers/BlgSlice';
+import { toast } from 'react-toastify';
+import { domainBack } from '../../configs/Api';
+import { useTranslation } from 'react-i18next';
 
 const Blogs = () => {
 	const dispatch = useDispatch();
-	const { blogs, blog, loading, pagination } = useSelector((state) => state.BlogSlice);
+	const navigate = useNavigate();
+	const { state } = useLocation();
+	console.log('state', state);
+
+	const { blogs, loading, pagination } = useSelector((state) => state.BlogSlice);
 	console.log('blogs', blogs, pagination);
-	console.log('blog', blog);
+
+	// const [firstBlog, setFirstBlog] = useState(async ()=> await blogs?.[0]);
 
 	useEffect(() => {
-		dispatch(getAllBlogs({ filter: {}, page: 1, limit: 10 }));
-		dispatch(getOneBlog('657cad438b056f2cdbc143e1'));
+		dispatch(getAllBlogs({ filter: { tags: state ?state?.tags:null}, page: 1, limit: 10 }));
 	}, []);
+
+	const handelDeleteBlog = async (id) => {
+		try {
+			await dispatch(deleteBlog(id)).unwrap();
+			navigate('/blog');
+			dispatch(getAllBlogs());
+		} catch (error) {
+			console.log('error', error);
+			toast.error(error.message);
+		}
+	};
+	const firstBlog = blogs?.[0];
+
+	console.log('firstBlog', firstBlog);
+
+	const { t, i18n } = useTranslation();
 
 	return (
 		<>
@@ -33,20 +58,26 @@ const Blogs = () => {
 							<div className="box-image">
 								<Card.Img
 									variant="top"
-									src={BlogsFeatured}
-									alt="Blogs Featured"
+									src={
+										firstBlog?.cover
+											? domainBack + firstBlog?.cover
+											: imgPlaceholder
+									}
+									alt={firstBlog?.title || ''}
+									className="py-3"
 								/>
 							</div>
 						</Col>
 						<Col md={8}>
 							<Card.Body className="box-text ">
-								<Card.Title>Lorem ipsum dolor sit amet</Card.Title>
-								<Card.Text>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-									eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-									enim ad minim veniam, quis nostrud
-								</Card.Text>
-								<Link className="text-dark">Read More</Link>
+								<Card.Title>{t(firstBlog?.title || '')}</Card.Title>
+								<Card.Text>{t(firstBlog?.content || '')}</Card.Text>
+								<Link
+									to={`/singleblog/${firstBlog?._id || ''}`}
+									className="text-dark"
+								>
+									{t('Read more')}
+								</Link>
 							</Card.Body>
 						</Col>
 					</Row>
@@ -54,17 +85,13 @@ const Blogs = () => {
 			</Container>
 			<div className="container p-4">
 				<Row className="m-md-auto">
-					<BlogCard />
-					<BlogCard />
-					<BlogCard />
-
-					<BlogCard />
-					<BlogCard />
-					<BlogCard />
-
-					<BlogCard />
-					<BlogCard />
-					<BlogCard />
+					{blogs?.slice(1).map((blog) => (
+						<BlogCard
+							key={blog?._id}
+							blog={blog}
+							handelDeleteBlog={handelDeleteBlog}
+						/>
+					))}
 				</Row>
 			</div>
 			<CTA />

@@ -84,7 +84,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/blog" element={<Blogs />} />
         <Route path="/contact us" element={<Contacts />} />
-        <Route path="/singleblog" element={<SingleBlog />} />
+        <Route path="/singleblog/:id" element={<SingleBlog />} />
         <Route path="/chat" element={<Chat />} />
 
         {/* ------------------------- /Common routes -----------------------------------------*/}
@@ -116,7 +116,8 @@ function App() {
 
         {login && userRole === 'admin' && <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />}
         {login && userRole === 'admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />}
-
+        {login && userRole === 'admin' && <Route path="/editblogsadmindashboard/:id" element={<AddNewBlogAdmin type={'edit'} />} />}
+         
         {/* ------------------------- /Admin Dashboard -----------------------------------------*/}
 
         {/* ------------------------- User Dashboard -----------------------------------------*/}

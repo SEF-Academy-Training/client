@@ -4,7 +4,7 @@ import AdminDashboardSideBar from '../../AdminDashboardGlobal/AdminDashboardSide
 import AddBlog from './AddBlog'
 import DashboardHeader from '../../../Global/Dashboard/DashboardHeader/DashboardHeader'
 
-const AddNewBlogAdmin = () => {
+const AddNewBlogAdmin = ({type = 'new'}) => {
   return (
     <Container fluid>
     <Row>
@@ -17,8 +17,8 @@ const AddNewBlogAdmin = () => {
       <Col sm={9}>
         <div style={{ paddingRight: '50px' }}>
           <div className="bg-light my-5 rounded-5">
-            <DashboardHeader pageTitle={'Add New Blog'} display={'display'} />
-            <AddBlog/>
+            <DashboardHeader pageTitle={'Update Blog'} display={'display'} />
+            <AddBlog type={type}/>
           </div>
         </div>
       </Col>
