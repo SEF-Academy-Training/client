@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 export const getAllBlogs = createAsyncThunk(
 	'BlogSlice/getAllBlogs',
 	async (queries, { rejectWithValue }) => {
+		const { filter = {}, page = 1, limit = 10 } = queries;
 		try {
-			const { filter = {}, page = 1, limit = 10 } = queries;
-			const res = await Api.get(`/blogs?page=${page}&limit=${limit}`, {params: filter });
+			const res = await Api.get(`/blogs?page=${page}&limit=${limit}`, {params: {filter} });
 			console.log('res', res);
 			return res.data;
 		} catch (error) {
@@ -86,6 +86,7 @@ export const BlogSlice = createSlice({
 		message: null,
 		success: false,
 	},
+	
 	extraReducers: (builder) => {
 		// builder.addCase(getAllBlogs.pending, (state, action) => {
 		// 	state.loading = true;

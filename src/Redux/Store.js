@@ -3,6 +3,7 @@ import UserSlice from './Reducers/UserSlice'
 import GlobalSlice from './Reducers/GlobalSlice'
 import AdminSlice from './Reducers/AdminSlice';
 import BlogSlice from './Reducers/BlgSlice';
+import ChatSlice from './Reducers/ChatSlice';
 
 const Store = configureStore({
 	reducer: {
@@ -10,6 +11,7 @@ const Store = configureStore({
 		GlobalSlice,
 		AdminSlice,
 		BlogSlice,
+		ChatSlice,
 	},
 });
 
