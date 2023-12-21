@@ -127,3 +127,29 @@
 .card-img-overlay ul {
     list-style-type: none;
 }
+
+/* Styles for mobile devices */
+@media screen and (max-width: 600px) {
+    .p-content-main {
+        font-size: 20px;
+    }
+    .title-content-main{
+        font-size: 50px;
+    }
+    .btn-content-main{
+        font-size: 1rem;
+    }
+  }
+
+  /* Styles for tablets */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    .p-content-main {
+        font-size: 22px;
+    }
+    .title-content-main{
+        font-size: 60px;
+    }
+    .btn-content-main{
+        font-size: 1.2rem;
+    }
+  }

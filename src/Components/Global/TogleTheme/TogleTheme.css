@@ -18,3 +18,11 @@
         opacity: 1;
     }
 }
+
+/* Styles for mobile devices */
+@media screen and (max-width: 600px) {
+    .themeDiv {
+        position: absolute;
+        left: 372px;
+    }
+}
