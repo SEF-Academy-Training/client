@@ -163,12 +163,12 @@ const TableBody = () => {
 
   // Use map directly if you need to transform the data
   const allUsers = users.map((user) => ({
-    id: user._id,
-    userName: user.userName,
-    userEmail: user.userEmail,
-    useNumber:user.useNumber, 
-    company:user.company, 
-    date:moment(user.date).format('YYYY-MM-DD'),
+    id: user?._id,
+    userName: user?.userName,
+    userEmail: user?.userEmail,
+    useNumber:user?.useNumber, 
+    company:user?.company, 
+    date:moment(user?.date).format('YYYY-MM-DD'),
     
   }));
 
@@ -249,5 +249,5 @@ const TableBody = () => {
   
 // }
 
-// export default TableBody
+export default TableBody
 
