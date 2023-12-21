@@ -43,8 +43,11 @@ import AddServicesAdminDashboard from './Components/AdminDashboard/ServicesAdmin
 
 function App() {
 
-  const login = useSelector((state) => state.UserSlice.login);
-  const userRole = useSelector((state) => state.UserSlice.userRole);
+  const { user: login } = useSelector((state) => state.user);
+  const userRole = useSelector((state) => state.user?.user?.role);
+
+  // const login = useSelector((state) => state.UserSlice.login);
+  // const userRole = useSelector((state) => state.UserSlice.userRole);
   const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 
 
@@ -98,34 +101,34 @@ function App() {
 
 
         {/* ------------------------- Dashboard -----------------------------------------*/}
-        {/* {login && userRole === 'admin' && <Route path="/admindashboard" element={<AdminDashboard />} />} */}
+        {/* {login && userRole === 'Admin' && <Route path="/admindashboard" element={<AdminDashboard />} />} */}
 
         {login && <Route path="/settingsdashboard" element={<SettingAdminDashboard />} />}
         {/* ------------------------ /Dashboard -----------------------------------------*/}
 
         {/* ------------------------ Admin Dashboard -----------------------------------------*/}
 
-         {login && userRole === 'admin' && <Route path="/useradmindashboard" element={<UserAdminDashboard />} />}
-        {login && userRole === 'admin' &&  <Route path="/addnewuseradmindashboard" element={<AddNewUserAdmin />} />}
-        {login && userRole === 'admin' &&  <Route path="/edituseradmindashboard" element={<EditUserAdmin />} />}
+         {login && userRole === 'Admin' && <Route path="/useradmindashboard" element={<UserAdminDashboard />} />}
+        {login && userRole === 'Admin' &&  <Route path="/addnewuseradmindashboard" element={<AddNewUserAdmin />} />}
+        {login && userRole === 'Admin' &&  <Route path="/edituseradmindashboard" element={<EditUserAdmin />} />}
 
 
-        {login && userRole === 'admin' && <Route path="/servicesadmindashboard" element={<ServicesAdminDashboard />} />}
-        {login && userRole === 'admin' && <Route path="/addnewservicesadmindashboard" element={<AddServicesAdminDashboard />} />}
+        {login && userRole === 'Admin' && <Route path="/servicesadmindashboard" element={<ServicesAdminDashboard />} />}
+        {login && userRole === 'Admin' && <Route path="/addnewservicesadmindashboard" element={<AddServicesAdminDashboard />} />}
 
 
-        {login && userRole === 'admin' && <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />}
-        {login && userRole === 'admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />}
-        {login && userRole === 'admin' && <Route path="/editblogsadmindashboard/:id" element={<AddNewBlogAdmin type={'edit'} />} />}
+        {login && userRole === 'Admin' && <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />}
+        {login && userRole === 'Admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />}
+        {login && userRole === 'Admin' && <Route path="/editblogsadmindashboard/:id" element={<AddNewBlogAdmin type={'edit'} />} />}
          
         {/* ------------------------- /Admin Dashboard -----------------------------------------*/}
 
         {/* ------------------------- User Dashboard -----------------------------------------*/}
-        {login && userRole === 'user' && <Route path="/servicesuserdashboard" element={<ServicesUserDashboard />} />}
-        {login && userRole === 'user' && <Route path="/personalpapersuser" element={< PersonalPapersUser />} />}
-        {login && userRole === 'user' && <Route path="/companypapersuser" element={<CompanyPapersUser />} />}
-        {login && userRole === 'user' && <Route path="/addnewserviesuser" element={< AddNewServiesUser />} />}
-        {login && userRole === 'user' && <Route path="/viewpapers" element={< ViewPapers />} />}
+        {login && userRole === 'User' && <Route path="/servicesuserdashboard" element={<ServicesUserDashboard />} />}
+        {login && userRole === 'User' && <Route path="/personalpapersuser" element={< PersonalPapersUser />} />}
+        {login && userRole === 'User' && <Route path="/companypapersuser" element={<CompanyPapersUser />} />}
+        {login && userRole === 'User' && <Route path="/addnewserviesuser" element={< AddNewServiesUser />} />}
+        {login && userRole === 'User' && <Route path="/viewpapers" element={< ViewPapers />} />}
 
         {/* ------------------------ /User Dashboard -----------------------------------------*/}
 

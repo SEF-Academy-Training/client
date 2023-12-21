@@ -44,8 +44,8 @@ const Header = () => {
   const [language, setLanguage] = useState('en');
 
 
-  const login = useSelector((state) => state.UserSlice.login);
-  const userRole = useSelector((state) => state.UserSlice.userRole);
+  // const login = useSelector((state) => state.UserSlice.login);
+  // const userRole = useSelector((state) => state.UserSlice.userRole);
   const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 
 
@@ -79,7 +79,7 @@ const Header = () => {
     navigate('/register');
   };
   const handleDashboard = () => {
-    user.role == 'Admin' ? navigate('/useradmindashboard'):navigate('/servicesuserdashboard')
+    user?.role == 'Admin' ? navigate('/useradmindashboard'):navigate('/servicesuserdashboard')
   }
 
   return (

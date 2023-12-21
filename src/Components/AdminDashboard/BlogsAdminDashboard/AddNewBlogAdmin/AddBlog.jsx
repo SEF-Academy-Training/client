@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
+// import { useDropzone } from 'react-dropzone';
 import { Badge, Button, Card, Col, Form, Image, Row, Spinner } from 'react-bootstrap';
-import { FaUpload } from 'react-icons/fa';
+// import { FaUpload } from 'react-icons/fa';
 //<<<<<<< blogs
 import defultImg from '../../../../assest/images/Vector.svg';
 import { useForm } from 'react-hook-form';
@@ -259,7 +259,7 @@ const AddBlog = ({ type = 'new' }) => {
 			</Row>
 		</div>
 	);
-=======
+// =======
 // import defultImg from '../../../../assest/images/Vector.svg'
 
 // const AddBlog = () => {

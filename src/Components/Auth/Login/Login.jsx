@@ -4,7 +4,7 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { errorMsg, successMsg } from '../../Global/Toastify/Toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLogin, setUserRole } from '../../../Redux/Reducers/UserSlice';
+// import { setLogin, setUserRole } from '../../../Redux/Reducers/UserSlice';
 import { getUser, loginUser } from '../../../Redux/Reducers/user';
 import { useForm } from "react-hook-form"; 
 
@@ -34,8 +34,8 @@ const LoginForm = () => {
 
   },[])
   ////////////////////////////////////
-  const userRole = useSelector((state) => state.UserSlice.userRole);
-  const login = useSelector((state) => state.UserSlice.login);
+  // const userRole = useSelector((state) => state.UserSlice.userRole);
+  // const login = useSelector((state) => state.UserSlice.login);
 
   const [formData, setFormData] = useState({
     email: '',
