@@ -14,7 +14,6 @@ const AddNewBlogAdmin = ({type = 'new'}) => {
         </div>
       </Col>
 
-
       <Col sm={9}>
         <div style={{ paddingRight: '50px' }}>
           <div className="bg-light my-5 rounded-5">

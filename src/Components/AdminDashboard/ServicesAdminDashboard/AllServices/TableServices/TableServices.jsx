@@ -1,9 +1,9 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 import TableBody from './TableBody'
-import { ServicesData, ServicesDataHeader } from '../../../DummyData/DummyData'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
+import { ServicesDataHeader } from '../../../../DummyData/DummyData'
 
 const TableServices = () => {
     const { t, i18n } = useTranslation();
@@ -29,8 +29,6 @@ const TableServices = () => {
                     ))}
                 </tr>
             </thead>
-
-
             <tbody className="table-body">
                 <TableBody />
             </tbody>

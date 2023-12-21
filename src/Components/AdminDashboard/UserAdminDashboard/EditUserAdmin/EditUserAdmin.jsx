@@ -2,11 +2,11 @@ import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import AdminDashboardSideBar from '../../AdminDashboardGlobal/AdminDashboardSideBar'
 import PaginationBar from '../../../Global/PaginationBar'
-import AddUser from './AddUser'
+import AddUser from './EditUser'
 import DashboardHeader from '../../../Global/Dashboard/DashboardHeader/DashboardHeader'
 import { useSelector } from 'react-redux'
 
-const AddNewUserAdmin = () => {
+const EditUserAdmin = () => {
   const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 
   return (
@@ -17,10 +17,12 @@ const AddNewUserAdmin = () => {
             <AdminDashboardSideBar />
           </div>
         </Col>
-       <Col sm={9}>
+
+
+        <Col sm={9}>
           <div style={{ paddingRight: '50px' }}>
             <div className={`my-5 rounded-5 ${toggleDark ? 'bg-dark text-light border' : ''}`}>
-              <DashboardHeader pageTitle={'Add New User'} display={'display'} />
+              <DashboardHeader pageTitle={'Update User'} display={'display'} />
               <AddUser />
             </div>
           </div>
@@ -30,4 +32,4 @@ const AddNewUserAdmin = () => {
     </Container>)
 }
 
-export default AddNewUserAdmin
+export default EditUserAdmin

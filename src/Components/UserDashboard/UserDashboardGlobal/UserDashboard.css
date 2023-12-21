@@ -1,3 +1,6 @@
 .sideBar ul li h6 {
     cursor: pointer;
 }
+.table td .selectedRow {
+    background-color: #000; 
+ }
