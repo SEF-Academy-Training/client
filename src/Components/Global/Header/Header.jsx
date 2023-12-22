@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { setActiveLink } from '../../../Redux/Reducers/GlobalSlice';
 import { NavbarData } from '../../DummyData/DummyData';
-import { setLogin, setLogout } from '../../../Redux/Reducers/UserSlice';
+// import { setLogin, setLogout } from '../../../Redux/Reducers/UserSlice';
 import Api from '../../../configs/Api';
 import { getUserData, logoutUser } from '../../../Redux/Reducers/user';
 
@@ -27,8 +27,9 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await dispatch(logoutUser());
-     } catch (error) {
-       console.error("Logout error:", error)
+      navigate('/')
+    } catch (error) {
+      console.error("Logout error:", error)
     }
   };
 
@@ -126,6 +127,7 @@ const Header = () => {
                       <Dropdown.Menu>
                         <Dropdown.Item onClick={handleLogout}>{t('Logout')}</Dropdown.Item>
                         <Dropdown.Item className='py-2' onClick={handleDashboard}>{t('Dashboard')}</Dropdown.Item>
+                        {/* <Dropdown.Item className='py-2' onClick={navigate('/chat')}>{t('Chat')}</Dropdown.Item> */}
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>

@@ -43,7 +43,7 @@ import AddServicesAdminDashboard from './Components/AdminDashboard/ServicesAdmin
 
 function App() {
 
-  const { user: login } = useSelector((state) => state.user);
+  const { isAuthenticated: login } = useSelector((state) => state.user);
   const userRole = useSelector((state) => state.user?.user?.role);
 
   // const login = useSelector((state) => state.UserSlice.login);
@@ -120,7 +120,7 @@ function App() {
         {login && userRole === 'Admin' && <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />}
         {login && userRole === 'Admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />}
         {login && userRole === 'Admin' && <Route path="/editblogsadmindashboard/:id" element={<AddNewBlogAdmin type={'edit'} />} />}
-         
+        
         {/* ------------------------- /Admin Dashboard -----------------------------------------*/}
 
         {/* ------------------------- User Dashboard -----------------------------------------*/}

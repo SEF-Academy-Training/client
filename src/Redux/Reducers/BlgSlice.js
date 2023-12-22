@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import Api, { handleApiError } from '../../configs/Api';
+import Api, { apiOption, handleApiError } from '../../configs/Api';
 import { toast } from 'react-toastify';
 
 export const getAllBlogs = createAsyncThunk(
@@ -7,7 +7,9 @@ export const getAllBlogs = createAsyncThunk(
 	async (queries, { rejectWithValue }) => {
 		const { filter = {}, page = 1, limit = 10 } = queries;
 		try {
-			const res = await Api.get(`/blogs?page=${page}&limit=${limit}`, {params: {filter} });
+			const res = await Api.get(`/blogs?page=${page}&limit=${limit}`, {
+				params: { filter },
+			});
 			console.log('res', res);
 			return res.data;
 		} catch (error) {
@@ -36,8 +38,9 @@ export const getOneBlog = createAsyncThunk(
 export const createBlog = createAsyncThunk(
 	'BlogSlice/createBlog',
 	async (data, { rejectWithValue }) => {
+		console.log('data', data);
 		try {
-			const res = await Api.post('/blogs', data);
+			const res = await Api.post('/blogs', data, apiOption);
 			return res.data;
 		} catch (error) {
 			// return rejectWithValue(error.message);
@@ -50,7 +53,7 @@ export const updateBlog = createAsyncThunk(
 	'BlogSlice/updateBlog',
 	async ({ id, data }, { rejectWithValue }) => {
 		try {
-			const res = await Api.patch(`/blogs/${id}`, data);
+			const res = await Api.patch(`/blogs/${id}`, data, apiOption);
 			return res.data;
 		} catch (error) {
 			// return rejectWithValue(error.message);
@@ -86,7 +89,7 @@ export const BlogSlice = createSlice({
 		message: null,
 		success: false,
 	},
-	
+
 	extraReducers: (builder) => {
 		// builder.addCase(getAllBlogs.pending, (state, action) => {
 		// 	state.loading = true;

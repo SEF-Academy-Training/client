@@ -154,7 +154,7 @@ const BlogsContent = () => {
 												{t('Edit')}
 											</Link>
 											<Card.Link
-												onClick={() => handleDelete(itm?.id)}
+												onClick={() => handleDelete(itm?._id)}
 												className={`text-danger btn ms-3  ${
 													i18n.language === 'en' ? '' : 'px-3'
 												}`}
