@@ -6,6 +6,7 @@ import BlogSlice from './Reducers/BlgSlice';
 import user from './Reducers/user';
 import { contactUs } from './Reducers/contactUsSlice';
 import ChatSlice from './Reducers/ChatSlice';
+import ServiceSlice from './Reducers/servicesSlice';
 
 const Store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ const Store = configureStore({
 		user: user,
 		contact: contactUs,
 		ChatSlice,
+		ServiceSlice,
 	},
 });
 
