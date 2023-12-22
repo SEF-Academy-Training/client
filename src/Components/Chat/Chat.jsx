@@ -1,15 +1,21 @@
 // Import the image at the top of your file
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { MessageBox, ChatList, Input } from 'react-chat-elements';
+import { MessageBox, ChatList, Input, Avatar } from 'react-chat-elements';
 import 'react-chat-elements/dist/main.css';
 import logo from '../../assest/images/Logo Text.svg'; // Make sure this path is correct
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserMyMessages, sendMessage } from '../../Redux/Reducers/ChatSlice';
+import {
+	getUserMessages,
+	getUserMyMessages,
+	getUsersWithMessages,
+	sendMessage,
+} from '../../Redux/Reducers/ChatSlice';
 import { toast } from 'react-toastify';
 import { domainBack } from '../../configs/Api';
 
+// handel show file size
 export function formatSize(size) {
 	if (size < 1024) {
 		return size + ' B';
@@ -23,12 +29,32 @@ export function formatSize(size) {
 const Chat = () => {
 	const dispatch = useDispatch();
 
-	const { chat, loading } = useSelector((state) => state.ChatSlice);
+	const { chat, chats, loading } = useSelector((state) => state.ChatSlice);
+	const { user } = useSelector((state) => state.user);
+	const Admin = user?.role === 'Admin';
 	console.log('chat', chat);
+	console.log('chats', chats);
+	console.log('user', user);
+
+	const [senderId, setSenderId] = useState(null);
+	useEffect(() => {
+		if (user && !Admin) {
+			dispatch(getUserMyMessages());
+		}
+	}, [dispatch, user, Admin]);
 
 	useEffect(() => {
-		dispatch(getUserMyMessages());
-	}, []);
+		if (user && Admin) {
+			dispatch(getUsersWithMessages());
+		}
+	}, [dispatch, user, Admin]);
+
+	useEffect(() => {
+		if (user && Admin && senderId) {
+			dispatch(getUserMessages(senderId));
+		}
+	}, [dispatch, user, Admin, senderId]);
+
 
 	// useEffect(() => {
 	// 	if (chat) {
@@ -47,9 +73,8 @@ const Chat = () => {
 	const handelSendMessage = async () => {
 		if (inputValue.trim() === '') return;
 		const newMessage = {
-			// sent_by: user?.role,
-			// user:user._id,
-			sent_by: 'User',
+			user: user?.role === 'Admin' ? senderId : user?._id,
+			sent_by: user?.role,
 			type: 'text',
 			text: inputValue,
 			date: new Date(),
@@ -59,13 +84,23 @@ const Chat = () => {
 		try {
 			await dispatch(sendMessage(newMessage)).unwrap();
 			setInputValue('');
-			dispatch(getUserMyMessages());
+			if (Admin) {
+				dispatch(getUserMessages(senderId));
+			} else {
+				dispatch(getUserMyMessages());
+			}
 		} catch (error) {
 			console.log(error);
 			// toast.error(error.message);
 		}
 	};
 
+	const handleChangeSender = (user) => {
+		console.log(user);
+		setSenderId(user?.id);
+	};
+
+	console.log('senderId', senderId);
 	// const sendMessage = () => {
 	// 	if (inputValue.trim() === '') return;
 	// 	const newMessage = {
@@ -91,17 +126,32 @@ const Chat = () => {
 			<div className="container">
 				<ChatList
 					className="chat-list"
-					dataSource={[
-						{
-							avatar: logo,
-							alt: 'User Avatar',
-							// title: 'Tax Hub',
-							title: 'Hello, What is your services?',
-							// subtitle: 'Hello, how can I help you?',
-							date: new Date(),
-							unread: 0,
-						},
-					]}
+					dataSource={
+						user?.role === 'Admin'
+							? chats?.map((ele) => ({
+									avatar: ele?.profileImg ? domainBack + ele?.profileImg : null,
+									alt: ele?.userName || '',
+									title: ele?.userName || '',
+									// title: 'Hello, What is your services?',
+									// subtitle: 'Hello, how can I help you?',
+									id: ele?._id,
+									date: new Date(),
+									unread: 2,
+							}))
+							: [
+									{
+										avatar: logo,
+										alt: 'User Avatar',
+										// title: 'Tax Hub',
+										title: 'Hello, What is your services?',
+										// subtitle: 'Hello, how can I help you?',
+										date: new Date(),
+										unread: 0,
+									},
+							]
+					}
+					onClick={handleChangeSender}
+					id={senderId}
 				/>
 
 				{/* Render the messages ----------------------------------- */}
@@ -113,7 +163,9 @@ const Chat = () => {
 							type={message?.type}
 							text={message?.text}
 							position={
-								message?.sent_by?.toLowerCase() === 'admin' ? 'left' : 'right'
+								message?.sent_by?.toLowerCase() === user?.role?.toLowerCase()
+									? 'right'
+									: 'left'
 							}
 							data={{
 								uri: domainBack + message?.file?.url,
@@ -138,7 +190,11 @@ const Chat = () => {
 					value={inputValue}
 					onChange={(e) => setInputValue(e.target.value)}
 					onKeyPress={handleKeyPress}
-					rightButtons={<button onClick={handelSendMessage}>Send</button>}
+					rightButtons={
+						<button disabled={!inputValue || !senderId} onClick={handelSendMessage}>
+							Send
+						</button>
+					}
 				/>
 			</div>
 

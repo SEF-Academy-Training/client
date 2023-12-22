@@ -52,7 +52,8 @@ export const sendMessage = createAsyncThunk(
 	async (data, { rejectWithValue }) => {
 		try {
 			const res = await Api.post('/chat/send-message', data);
-			return res.data;
+			getUserMyMessages();
+			// return res.data;
 		} catch (error) {
 			// return rejectWithValue(error.message);
 			throw handleApiError(error);
@@ -65,7 +66,8 @@ export const sendfile = createAsyncThunk(
 	async (data, { rejectWithValue }) => {
 		try {
 			const res = await Api.post('/chat/send-file', data);
-			return res.data;
+			getUserMyMessages();
+			// return res.data;
 		} catch (error) {
 			// return rejectWithValue(error.message);
 			throw handleApiError(error);
@@ -105,7 +107,7 @@ export const ChatSlice = createSlice({
 	name: 'ChatSlice',
 	initialState: {
 		chats: [],
-		chat: null,
+		chat: [],
 		loading: false,
 
 		error: null,
@@ -153,6 +155,7 @@ export const ChatSlice = createSlice({
 		builder.addCase(getUserMyMessages.fulfilled, (state, action) => {
 			state.loading = false;
 			state.chat = action?.payload?.data;
+			console.log('action?.payload?.data', action?.payload?.data);
 			// toast.success(action.payload?.message);
 		});
 
@@ -231,7 +234,6 @@ export const ChatSlice = createSlice({
 					state.message = '';
 					state.error = action.payload; // This assumes handleApiError returns the appropriate value
 					console.log('action.payload rejected', action.payload);
-					state.course = {};
 					state.success = false;
 				}
 			);
