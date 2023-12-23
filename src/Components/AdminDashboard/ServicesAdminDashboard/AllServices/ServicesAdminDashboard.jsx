@@ -28,7 +28,7 @@ const ServicesAdminDashboard = () => {
                             <div className={`my-5 rounded-5  ${toggleDark ? 'bg-dark text-light border' : 'bg-light text-dark'}`}>
                                 <DashboardHeader pageTitle={'All services'} />
                                 <TableServices activeLink={activeLink} />
-                                <PaginationBar />
+                                {/* <PaginationBar /> */}
                             </div>
                         </div>
                     </Col>

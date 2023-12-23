@@ -56,13 +56,21 @@ export const AdminSidebarData = [
 			'/servicesadmindashboard',
 			'/servicesadmindashboard',
 			'/servicesadmindashboard',
-			'/addnewservicesadmindashboard',
+			// '/addnewservicesadmindashboard',
 		],
-		data: ['Unread', 'Ongoing', 'All Services', 'Add New Services'],
-		dataAr: ['غير مقروء', ' جاري', 'جميع الخدمات', 'اضافه خدمه جديده'],
+		data: ['Unread', 'Ongoing', 'All Services'], //, 'Add New Services'
+		dataAr: ['غير مقروء', ' جاري', 'جميع الخدمات'], //, 'اضافه خدمه جديده'
 	},
 	{
-		id: 24,
+		id: 23,
+		title: 'Our Services',
+		titleAr: 'خدماتنا',
+		path: ['/showOurservicesadmindashboard', '/addnewservicesadmindashboard'],
+		data: ['Our Services', 'Add New Services'],
+		dataAr: [' جاري', 'جميع خدماتنا', 'اضافه خدمه جديده'],
+	},
+	{
+		id: 25,
 		title: 'Settings',
 		titleAr: 'الإعدادات',
 		path: ['/settingsadmindashboard'],

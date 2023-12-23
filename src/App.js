@@ -35,6 +35,7 @@ import ViewPapers from './Components/UserDashboard/PapersUser/CompanyPapersUser/
 import EditUserAdmin from './Components/AdminDashboard/UserAdminDashboard/EditUserAdmin/EditUserAdmin';
 import ServicesAdminDashboard from './Components/AdminDashboard/ServicesAdminDashboard/AllServices/ServicesAdminDashboard';
 import AddServicesAdminDashboard from './Components/AdminDashboard/ServicesAdminDashboard/AddNewServices/AddNewServices';
+import AddNewServiesAdmin from './Components/AdminDashboard/ServicesAdminDashboard/AddNewServiesUser';
 
 // import { ThemeProvider } from 'react-bootstrap';
 // eos
@@ -108,14 +109,15 @@ function App() {
 
         {/* ------------------------ Admin Dashboard -----------------------------------------*/}
 
-         {login && userRole === 'Admin' && <Route path="/useradmindashboard" element={<UserAdminDashboard />} />}
+        {login && userRole === 'Admin' && <Route path="/useradmindashboard" element={<UserAdminDashboard />} />}
         {login && userRole === 'Admin' &&  <Route path="/addnewuseradmindashboard" element={<AddNewUserAdmin />} />}
         {login && userRole === 'Admin' &&  <Route path="/edituseradmindashboard" element={<EditUserAdmin />} />}
 
 
         {login && userRole === 'Admin' && <Route path="/servicesadmindashboard" element={<ServicesAdminDashboard />} />}
-        {login && userRole === 'Admin' && <Route path="/addnewservicesadmindashboard" element={<AddServicesAdminDashboard />} />}
-
+        {login && userRole === 'Admin' && <Route path="/addnewservicesadmindashboard" element={<AddServicesAdminDashboard type = 'new'/>} />}
+        {login && userRole === 'Admin' && <Route path="/editourservicesadmindashboard/:id" element={<AddServicesAdminDashboard type = 'edit' />} />}
+        {login && userRole === 'Admin' && <Route path="/showOurservicesadmindashboard" element={< AddNewServiesAdmin />} />}
 
         {login && userRole === 'Admin' && <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />}
         {login && userRole === 'Admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />}

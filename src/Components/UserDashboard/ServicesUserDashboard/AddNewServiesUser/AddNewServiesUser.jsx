@@ -28,7 +28,7 @@ const AddNewServiesUser = () => {
 								<DashboardHeader pageTitle={'Request New Service'} />
 								<TableServices activeLink={activeLink} />
 
-								<PaginationBar />
+								{/* <PaginationBar /> */}
 							</div>
 						</div>
 					</Col>

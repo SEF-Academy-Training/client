@@ -7,6 +7,7 @@ import user from './Reducers/user';
 import { contactUs } from './Reducers/contactUsSlice';
 import ChatSlice from './Reducers/ChatSlice';
 import ServiceSlice from './Reducers/servicesSlice';
+import OurServiceSlice from './Reducers/ourServicesSlice';
 
 const Store = configureStore({
 	reducer: {
@@ -18,6 +19,7 @@ const Store = configureStore({
 		contact: contactUs,
 		ChatSlice,
 		ServiceSlice,
+		OurServiceSlice,
 	},
 });
 

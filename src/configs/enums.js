@@ -40,11 +40,11 @@ export const PaperDocs = [
 	{ hash: 1113, type: 'personal', title: 'tax card' },
 	{ hash: 1114, type: 'personal', title: 'establishment contract' },
 	// company papers
-	{ hash: 1115, type: 'personal', title: 'VAT' },
-	{ hash: 1116, type: 'personal', title: 'withhold tax' },
-	{ hash: 1117, type: 'personal', title: 'payroll tax' },
-	{ hash: 1118, type: 'personal', title: 'annual income' },
-	{ hash: 1119, type: 'personal', title: 'annual balance' },
+	{ hash: 1115, type: 'company', title: 'VAT' },
+	{ hash: 1116, type: 'company', title: 'withhold tax' },
+	{ hash: 1117, type: 'company', title: 'payroll tax' },
+	{ hash: 1118, type: 'company', title: 'annual income' },
+	{ hash: 1119, type: 'company', title: 'annual balance' },
 ];
 
 export const ourServices = [
