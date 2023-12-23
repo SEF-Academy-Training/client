@@ -118,6 +118,7 @@ function App() {
         {login && userRole === 'Admin' && <Route path="/addnewservicesadmindashboard" element={<AddServicesAdminDashboard type = 'new'/>} />}
         {login && userRole === 'Admin' && <Route path="/editourservicesadmindashboard/:id" element={<AddServicesAdminDashboard type = 'edit' />} />}
         {login && userRole === 'Admin' && <Route path="/showOurservicesadmindashboard" element={< AddNewServiesAdmin />} />}
+        {login && userRole === 'Admin' && <Route path="/showpapersdmindashboard" element={< PersonalPapersUser />} />}
 
         {login && userRole === 'Admin' && <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />}
         {login && userRole === 'Admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />}

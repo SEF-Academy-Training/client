@@ -94,79 +94,35 @@ export const ServiceSlice = createSlice({
 	},
 
 	extraReducers: (builder) => {
-		// builder.addCase(getAllServices.pending, (state, action) => {
-		// 	state.loading = true;
-		// 	state.services = [];
-		// 	state.pagination = null;
-		// 	console.log(action);
-		// });
 		builder.addCase(getAllServices.fulfilled, (state, action) => {
 			state.loading = false;
 			state.services = action?.payload?.data;
 			state.pagination = action?.payload?.pagination;
 		});
-		// builder.addCase(getAllServices.rejected, (state, action) => {
-		// 	state.loading = false;
-		// 	state.services = [];
-		// 	state.pagination = null;
-		// 	console.log(action);
-		// });
 
-		// builder.addCase(getOneService.pending, (state, action) => {
-		// 	state.loading = true;
-		// 	state.service = null;
-		// });
 		builder.addCase(getOneService.fulfilled, (state, action) => {
 			state.loading = false;
 			state.service = action?.payload?.data;
 			toast.success(action.payload?.message);
 		});
-		// builder.addCase(getOneService.rejected, (state, action) => {
-		// 	state.loading = false;
-		// 	state.service = null;
-		// });
 
-		// builder.addCase(createService.pending, (state, action) => {
-		// 	state.loading = true;
-		// 	state.service = null;
-		// });
 		builder.addCase(createService.fulfilled, (state, action) => {
 			state.loading = false;
 			state.service = action?.payload?.data;
 			toast.success(action.payload?.message);
 		});
-		// builder.addCase(createService.rejected, (state, action) => {
-		// 	state.loading = false;
-		// 	state.service = null;
-		// });
 
-		// builder.addCase(updateService.pending, (state, action) => {
-		// 	state.loading = true;
-		// 	state.service = null;
-		// });
 		builder.addCase(updateService.fulfilled, (state, action) => {
 			state.loading = false;
 			state.service = action?.payload?.data;
 			toast.success(action.payload?.message);
 		});
-		// builder.addCase(updateService.rejected, (state, action) => {
-		// 	state.loading = false;
-		// 	state.service = null;
-		// });
 
-		// builder.addCase(deleteService.pending, (state, action) => {
-		// 	state.loading = true;
-		// 	state.service = null;
-		// });
 		builder.addCase(deleteService.fulfilled, (state, action) => {
 			state.loading = false;
 			state.service = action?.payload?.data;
-			toast.success(action.payload?.message|| 'Service delete successfully');
+			toast.success(action.payload?.message || 'Service delete successfully');
 		});
-		// builder.addCase(deleteService.rejected, (state, action) => {
-		// 	state.loading = false;
-		// 	state.service = null;
-		// });
 
 		builder
 			.addMatcher(
@@ -178,19 +134,7 @@ export const ServiceSlice = createSlice({
 					state.message = '';
 				}
 			)
-			// .addMatcher(
-			// 	(action) => action.type.endsWith('/fulfilled'),
-			// 	(state, action) => {
-			// 		state.loading = false;
-			// 		state.error = '';
-			// 		state.message = action.payload?.message || '';
-			// 		state.services =
-			// 			Array.isArray(action?.payload?.data) && action?.payload?.data;
-			// 		state.service = !Array.isArray(action.payload.data) && action?.payload?.data;
-			// 		state.success = action.payload.success || false;
-			// 		toast.success(action.payload?.message);
-			// 	}
-			// )
+
 			.addMatcher(
 				(action) => action.type.endsWith('/rejected'),
 				(state, action) => {

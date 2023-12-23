@@ -15,7 +15,7 @@ export const enum_ServiceCategory = [
 	'training workshops',
 	'investment & incorporation',
 ];
-export const enum_ServiceStatus = ['start', 'pending', 'completed'];
+export const enum_ServiceStatus = ['pending', 'ongoing',  'completed'];
 
 export const enum_paperStatus = ['valid', 'not valid'];
 export const enum_PaperTypes = ['personal', 'company'];

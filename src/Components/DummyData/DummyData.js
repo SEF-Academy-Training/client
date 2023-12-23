@@ -121,6 +121,58 @@ export const ServicesDataHeader = [
 		titleAr: 'الإجراءات',
 	},
 ];
+export const ServicesDataHeaderAdmin = [
+	{
+		id: 89,
+		title: '',
+		titleAr: '',
+	},
+	{
+		id: 90,
+		title: '#',
+		titleAr: '',
+	},
+	// {
+	// 	id: 91,
+	// 	title: '',
+	// 	titleAr: '',
+	// },
+	{
+		id: 92,
+		title: 'Service',
+		titleAr: 'الخدمة',
+	},
+	{
+		id: 93,
+		title: 'Serial-code',
+		titleAr: 'الكود التسلسلي',
+	},
+	{
+		id: 94,
+		title: 'User',
+		titleAr: 'المستخدم',
+	},
+	{
+		id: 95,
+		title: 'Date',
+		titleAr: 'التاريخ',
+	},
+	{
+		id: 96,
+		title: 'Papers',
+		titleAr: 'المستندات',
+	},
+	{
+		id: 97,
+		title: 'Actions',
+		titleAr: 'الإجراءات',
+	},
+	// {
+	// 	id: 98,
+	// 	title: '',
+	// 	titleAr: '',
+	// },
+];
 
 export const ServicesData = [
 	{

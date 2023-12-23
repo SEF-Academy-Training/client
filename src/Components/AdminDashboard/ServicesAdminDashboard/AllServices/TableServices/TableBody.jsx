@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { infoMsg } from '../../../../Global/Toastify/Toastify';
 // import { deleteService } from '../../../../../Redux/Reducers/AdminSlice';
 import {
 	deleteService,
 	getAllServices,
+	updateService,
 } from '../../../../../Redux/Reducers/servicesSlice';
+import { Form } from 'react-bootstrap';
+import { enum_ServiceStatus } from '../../../../../configs/enums';
 
 const TableBody = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { services } = useSelector((state) => state.ServiceSlice);
 
 	useEffect(() => {
 		dispatch(getAllServices({}));
-	}, []);
+	}, [dispatch]);
+
+	const handelChangeStatus = (e, id) => {
+		console.log(id, { status: e.target.value });
+		dispatch(updateService({ id, data: { status: e.target.value } }));
+	};
 
 	const sortData = useSelector((state) => state.GlobalSlice.sortData);
 	const searchQuery = useSelector((state) => state.GlobalSlice.searchQuery);
@@ -98,30 +107,63 @@ const TableBody = () => {
 			<tr key={service?._id}>
 				<td></td>
 				<td>{index + 1}</td>
-				<td></td>
+				{/* <td></td> */}
 				<td>{service?.title}</td>
 				<td>#{service?.code}</td>
 				<td>{service?.created_by?.userName}</td>
 				<td>{new Date(service?.createdAt).toLocaleDateString()}</td>
-				<td>{service?.status}</td>
+				{/* <td>{service?.status}</td> */}
 				<td>
 					<Link
+						onClick={() => navigate('/showpapersdmindashboard', { state: service })}
+						className={`py-1 text-decoration-none me-2`}
+					>
+						Papers
+					</Link>
+				</td>
+				<td>
+					<div className="d-flex gap-2">
+						<Form.Select
+							className={`w-75 ${
+								service?.status === 'completed'
+									? 'text-success fw-bold'
+									: service?.status === 'ongoing'
+									? 'text-primary'
+									: 'text-warning'
+							}`}
+							defaultValue={service?.status}
+							onChange={(e) => handelChangeStatus(e, service?._id)}
+						>
+							<option hidden value="">
+								Select...
+							</option>
+							{enum_ServiceStatus?.map((item, index) => (
+								<option key={index} value={item}>
+									{item}
+								</option>
+							))}
+						</Form.Select>
+						{/* </td>
+				<td> */}
+						{/* <Link
 						className={`py-1 text-decoration-none me-2 ${
 							service?.status === 'completed' ? 'text-success fw-bold' : ''
 						}`}
 					>
-            edit
-						{/* {service?.status} */}
-					</Link>
-					{/* </td>
+						edit
+						{service?.status}
+					</Link> */}
+						{/* </td>
 				<td> */}
-					<Link
-						className="py-1 text-decoration-none mx-3 text-danger"
-						onClick={() => handleDelete(service?._id)}
-					>
-						{/* {service?.status} */}
-						Delete
-					</Link>
+
+						<Link
+							className="py-1 text-decoration-none mx-3 text-danger"
+							onClick={() => handleDelete(service?._id)}
+						>
+							{/* {service?.status} */}
+							Delete
+						</Link>
+					</div>
 				</td>
 			</tr>
 		));
