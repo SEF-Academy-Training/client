@@ -14,21 +14,21 @@ const ServicesAdminDashboard = () => {
 	// const navigate = useNavigate();
 	const sortData = useSelector((state) => state.GlobalSlice.sortData);
 	const searchQuery = useSelector((state) => state.GlobalSlice.searchQuery);
-	const activeLink = useSelector((state) => state.AdminSlice.activeLink);
+	const serviceStatus = useSelector((state) => state.AdminSlice.serviceStatus);
 
-	const [status, setStatus] = useState('');
+	// const [status, setStatus] = useState('');
 
-	useEffect(() => {
-		if (activeLink === 'unread') {
-			setStatus('pending');
-		} else if (activeLink === 'ongoing') {
-			setStatus('ongoing');
-		} else {
-			setStatus(null);
-		}
-	}, [activeLink]);
+	// useEffect(() => {
+	// 	if (activeLink === 'unread') {
+	// 		setStatus('pending');
+	// 	} else if (activeLink === 'ongoing') {
+	// 		setStatus('ongoing');
+	// 	} else {
+	// 		setStatus(null);
+	// 	}
+	// }, [activeLink]);
 
-	console.log('activeLink', activeLink);
+	console.log('serviceStatus', serviceStatus);
 	const { pagination } = useSelector((state) => state.ServiceSlice);
 	const { pages, page } = pagination || {};
 
@@ -47,7 +47,7 @@ const ServicesAdminDashboard = () => {
 			getAllServices({
 				page: changePage,
 				filter: {
-					status,
+					status: serviceStatus,
 					$or: [
 						{ title: { $regex: searchQuery, $options: 'i' } },
 						{ status: { $regex: searchQuery, $options: 'i' } },
@@ -56,7 +56,7 @@ const ServicesAdminDashboard = () => {
 				},
 			})
 		);
-	}, [searchQuery, changePage, sortData, activeLink, status, dispatch]);
+	}, [searchQuery, changePage, sortData, serviceStatus, dispatch]);
 
 
 	const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
@@ -78,7 +78,7 @@ const ServicesAdminDashboard = () => {
 								}`}
 							>
 								<DashboardHeader pageTitle={'All services'} />
-								<TableServices activeLink={activeLink} />
+								<TableServices />
 								<PaginationBar
 									pages={pages}
 									page={page}

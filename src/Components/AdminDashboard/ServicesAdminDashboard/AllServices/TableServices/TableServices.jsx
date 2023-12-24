@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { ServicesDataHeaderAdmin } from '../../../../DummyData/DummyData';
 // import { ServicesDataHeader } from '../../../../DummyData/DummyData'
 
-const TableServices = () => {
+const TableServices = ({ status }) => {
 	const { t, i18n } = useTranslation();
 	const toggleDark = useSelector((state) => state.GlobalSlice.toggleDark);
 
@@ -33,7 +33,7 @@ const TableServices = () => {
 				</tr>
 			</thead>
 			<tbody className="table-body">
-				<TableBody />
+				<TableBody status={status} />
 			</tbody>
 		</Table>
 	);

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 // import { useDropzone } from 'react-dropzone';
-import { Badge, Button, Card, Col, Form, Image, Row, Spinner } from 'react-bootstrap';
+import { Badge, Button, Col, Form, Image, Row, Spinner } from 'react-bootstrap';
 // import { FaUpload } from 'react-icons/fa';
 //<<<<<<< blogs
 import defultImg from '../../../../assest/images/Vector.svg';
@@ -59,7 +59,7 @@ const AddBlog = ({ type = 'new' }) => {
 		reValidateMode: 'onChange',
 
 		defaultValues: type === 'edit' ? blog : initialBlog,
-		values: blog && editableData(blog, initialBlog),
+		values: type === 'edit' ? blog && editableData(blog, initialBlog) : initialBlog,
 
 		resolver: yupResolver(type === 'edit' ? updateBlogValidation : newBlogValidation),
 	});

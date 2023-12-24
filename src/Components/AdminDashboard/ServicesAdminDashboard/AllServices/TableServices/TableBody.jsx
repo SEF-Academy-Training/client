@@ -12,13 +12,15 @@ import {
 import { Form } from 'react-bootstrap';
 import { enum_ServiceStatus } from '../../../../../configs/enums';
 
-const TableBody = () => {
+const TableBody = ({ status }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { services, loading } = useSelector((state) => state.ServiceSlice);
+	const serviceStatus = useSelector((state) => state.AdminSlice.serviceStatus);
+
 
 	useEffect(() => {
-		dispatch(getAllServices({}));
+		dispatch(getAllServices({ filter: { status: serviceStatus } }));
 	}, [dispatch]);
 
 	const handelChangeStatus = (e, id) => {

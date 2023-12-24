@@ -124,7 +124,7 @@ function App() {
         {/* {login && userRole === 'Admin' && <Route path="/showpapersdmindashboard" element={< PersonalPapersUser />} />} */}
 
         {login && userRole === 'Admin' && <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />}
-        {login && userRole === 'Admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />}
+        {login && userRole === 'Admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin  type={'new'} />} />}
         {login && userRole === 'Admin' && <Route path="/editblogsadmindashboard/:id" element={<AddNewBlogAdmin type={'edit'} />} />}
         
         {/* ------------------------- /Admin Dashboard -----------------------------------------*/}

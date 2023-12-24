@@ -20,7 +20,6 @@ import { PaperDocs } from '../../../../../configs/enums';
 import { domainBack } from '../../../../../configs/Api';
 import PaginationBar from '../../../../Global/PaginationBar';
 
-
 const TableCompanyBody = ({ type }) => {
 	const dispatch = useDispatch();
 
@@ -158,6 +157,39 @@ const TableCompanyBody = ({ type }) => {
 		setShowState(false); // Update the state to hide the modal
 	};
 
+	function getFileType(url) {
+		const extension = url.split('.').pop().toLowerCase();
+		const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+
+		return imageExtensions.includes(extension) ? 'image' : 'file';
+	}
+
+	const handelShow = () => {
+		let src = '';
+
+		if (selectedImage) {
+			if (selectedImage?.type?.includes('image')) {
+				src = URL.createObjectURL(selectedImage);
+			} else {
+				src = fileImg;
+			}
+		} else if (clickedDocument?.file) {
+			console.log(
+				'getFileType(clickedDocument?.file)',
+				getFileType(clickedDocument?.file)
+			);
+			if (getFileType(clickedDocument?.file) == 'image') {
+				src = domainBack + clickedDocument?.file;
+			} else {
+				src = fileImg;
+			}
+		}else{
+			src =uploadImg
+		}
+		console.log('src', src);
+		return src;
+	};
+
 	return (
 		<>
 			{DataLang.sort((a, b) =>
@@ -238,20 +270,22 @@ const TableCompanyBody = ({ type }) => {
 							/>
 							<Image
 								onClick={handleImageChange}
-								src={
-									selectedImage
-										? selectedImage?.type?.includes('image')
-											? URL.createObjectURL(selectedImage) || uploadImg
-											: fileImg
-										: (clickedDocument?.file &&
-												domainBack + clickedDocument?.file) ||
-										  fileImg
-								}
+								// src={
+								// 	selectedImage
+								// 		? selectedImage?.type?.includes('image')
+								// 			? URL.createObjectURL(selectedImage) || uploadImg
+								// 			: fileImg
+								// 		: (clickedDocument?.file &&
+								// 				domainBack + clickedDocument?.file) ||
+								// 		  fileImg
+								// }
+								src={handelShow()}
 								alt="defult image"
 								className="pointer"
 								style={{ height: '70%' }}
 							/>
 						</Form.Group>
+						{clickedDocument?.file && !selectedImage &&
 						<Link
 							className="btn btn-primary d-block mx-auto"
 							download={clickedDocument?.document}
@@ -260,7 +294,7 @@ const TableCompanyBody = ({ type }) => {
 							to={clickedDocument?.file && domainBack + clickedDocument?.file}
 						>
 							DownLoad
-						</Link>
+						</Link>}
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant="secondary" onClick={handleClose}>
