@@ -21,7 +21,7 @@ const Home = () => {
     <div style={{ fontFamily: 'ZCOOL XiaoWei, sans-serif' }}>
       <MainSection />
       {/* ------- */}
-      {/* <div className="container-our-value w-100">
+      <div className="container-our-value w-100">
         <div className="rate-our-values m-auto d-flex justify-content-around mb-5 border-secondary-subtle rounded-4">
           <div className="rate-one text-lg-center">
             <Counter endValue={30} name={"Years of Experience"} />
@@ -30,9 +30,9 @@ const Home = () => {
           </div>
         </div>
         <OurValues />
-      </div> */}
+      </div>
 
-      {/* <section className="our-services">
+      <section className="our-services">
         <h1 className="fs-1 text-lg-center py-5 text-our-services">OUR SERVICES</h1>
         <Container>
           <Row xs={1} md={3} className="g-4">
@@ -47,9 +47,9 @@ const Home = () => {
             <Link to="/contact" className="btn btn-primary text-decoration-none rounded-pill px-5 my-3" style={{ fontSize: "26px" }}>Contact Us</Link>
           </div>
         </Container>
-      </section> */}
+      </section>
 
-      {/* <section className="sponserd">
+      <section className="sponserd">
         <Container>
           <Row className="align-items-center">
             <Col xs={12} sm={4}>
@@ -72,8 +72,8 @@ const Home = () => {
             </Col>
           </Row>
         </Container>
-      </section> */}
-      {/* <ExploreBlogs /> */}
+      </section>
+      <ExploreBlogs />
     </div >
   );
 }
