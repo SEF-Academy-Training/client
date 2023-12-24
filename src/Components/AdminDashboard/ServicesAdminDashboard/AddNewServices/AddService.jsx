@@ -213,7 +213,7 @@ const AddService = ({ type }) => {
 									<Form.Check
 										type="checkbox"
 										id={item?.title}
-										label={item?.title}
+										label={item?.document}
 										isValid={
 											touchedFields?.requiredPapers && !errors?.requiredPapers
 										}
