@@ -4,7 +4,7 @@ import GlobalSlice from './Reducers/GlobalSlice';
 import AdminSlice from './Reducers/AdminSlice';
 import BlogSlice from './Reducers/BlgSlice';
 import user from './Reducers/user';
-import { contactUs } from './Reducers/contactUsSlice';
+import contactUs from './Reducers/contactUsSlice';
 import ChatSlice from './Reducers/ChatSlice';
 import ServiceSlice from './Reducers/servicesSlice';
 import OurServiceSlice from './Reducers/ourServicesSlice';

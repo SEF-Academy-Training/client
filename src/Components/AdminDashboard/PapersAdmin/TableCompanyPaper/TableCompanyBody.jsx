@@ -1,28 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { errorMsg, infoMsg } from '../../../../Global/Toastify/Toastify';
-//import { deletePaper, setShow } from '../../../../../Redux/Reducers/UserSlice';
 import { Button, Col, Form, Image, Modal } from 'react-bootstrap';
-// import defaultImg from '../../../../../assest/images/default-placeholder.png';
-// import uploadImg from '../../../../assest/images/Vector.svg';
-import uploadImg from '../../../../../assest/images/Vector.svg';
-import fileImg from '../../../../../assest/images/file-document.png';
+
+import uploadImg from '../../../../assest/images/Vector.svg';
+import fileImg from '../../../../assest/images/file-document.png';
 
 import {
-	getAllPapers,
 	createPaper,
-	updatePaper,
 	deletePaper,
-} from '../../../../../Redux/Reducers/paperSlice';
-import { PaperDocs } from '../../../../../configs/enums';
-import { domainBack } from '../../../../../configs/Api';
-import PaginationBar from '../../../../Global/PaginationBar';
-
+	getAllPapers,
+	updatePaper,
+} from '../../../../Redux/Reducers/paperSlice';
+import { errorMsg } from '../../../Global/Toastify/Toastify';
+import { domainBack } from '../../../../configs/Api';
+import { PaperDocs, enum_paperStatus } from '../../../../configs/enums';
 
 const TableCompanyBody = ({ type }) => {
 	const dispatch = useDispatch();
+	const {state} = useLocation()
+	console.log('state', state);
 
 	const { papers, loading } = useSelector((state) => state.paperSlice);
 	const { user } = useSelector((state) => state.user);
@@ -33,7 +31,7 @@ const TableCompanyBody = ({ type }) => {
 	const [show, setShowState] = useState(false);
 
 	useEffect(() => {
-		dispatch(getAllPapers({ filter: { type } }));
+		dispatch(getAllPapers({ filter: { user: state?.created_by?._id } }));
 		// dispatch(getOnePaper());
 	}, [dispatch, type]);
 
@@ -66,6 +64,11 @@ const TableCompanyBody = ({ type }) => {
 		// console.log(serData);
 		return serData;
 	});
+
+	const handelChangeStatus = (e, id) => {
+		console.log(id, { status: e.target.value });
+		dispatch(updatePaper({ id, data: { status: e.target.value } }));
+	};
 
 	const imageInput = useRef();
 	const [selectedImage, setSelectedImage] = useState(null);
@@ -132,15 +135,15 @@ const TableCompanyBody = ({ type }) => {
 		}
 		// infoMsg(`${document.title} is Deleted`);
 	};
-	// const handleUpdate = async (_id) => {
-	// 	try {
-	// 		await dispatch(updatePaper(_id)).unwrap();
-	// 		dispatch(getAllPapers({ filter: { type } }));
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// 	// infoMsg(`Paper of id =${_id} is Deleted`);
-	// };
+	const handleUpdate = async (_id) => {
+		try {
+			await dispatch(updatePaper(_id)).unwrap();
+			dispatch(getAllPapers({ filter: { type } }));
+		} catch (error) {
+			console.log(error);
+		}
+		// infoMsg(`Paper of id =${_id} is Deleted`);
+	};
 
 	const handleImageChange = () => {
 		imageInput.current.click();
@@ -175,17 +178,49 @@ const TableCompanyBody = ({ type }) => {
 						<td>{document?.hash}</td>
 						<td></td>
 						<td>{document.document}</td>
-						<td>{document.status}</td>
+						{/* <td>{document.status}</td> */}
+						<td>
+							<Form.Select
+								className={`w-75 ${
+									document?.status === 'valid'
+										? 'text-success fw-bold'
+										: document?.status === 'not valid'
+										? 'text-danger'
+										: 'text-warning'
+								}`}
+								defaultValue={document?.status}
+								onChange={(e) => handelChangeStatus(e, document?._id)}
+							>
+								<option hidden value="">
+									Select...
+								</option>
+								{enum_paperStatus?.map((item, index) => (
+									<option
+										key={index}
+										value={item}
+										className={`${
+											item === 'valid'
+												? 'text-success fw-bold'
+												: item === 'not valid'
+												? 'text-danger'
+												: 'text-warning'
+										}`}
+									>
+										{item}
+									</option>
+								))}
+							</Form.Select>
+						</td>
 						<td>{new Date(document?.createdAt)?.toLocaleDateString()}</td>
 						<td>{new Date(document?.updatedAt)?.toLocaleDateString()}</td>
 
-						<td className="d-flex gap-2 align-items-center">
+						<td>
 							<Link
 								className="py-x1 text-decoration-none text-primary me-2"
 								// onClick={() => handleUpdate(document)}
 								onClick={() => handelOpenModel(document)}
 							>
-								update
+								details
 							</Link>
 							<Link
 								className="py-1 text-decoration-none text-danger"
@@ -253,7 +288,7 @@ const TableCompanyBody = ({ type }) => {
 							/>
 						</Form.Group>
 						<Link
-							className="btn btn-primary d-block mx-auto"
+							className="btn btn-primary d-block mx-auto mt-3"
 							download={clickedDocument?.document}
 							target="_blank"
 							rel="noreferrer"
@@ -266,9 +301,9 @@ const TableCompanyBody = ({ type }) => {
 						<Button variant="secondary" onClick={handleClose}>
 							Close
 						</Button>
-						<Button variant="primary" onClick={handleUpload}>
+						{/* <Button variant="primary" onClick={handleUpload}>
 							Upload
-						</Button>
+						</Button> */}
 					</Modal.Footer>
 				</Modal>
 			)}

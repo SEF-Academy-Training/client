@@ -25,8 +25,8 @@ const TableServices = () => {
 			<thead className="table-header ">
 				{/* <RenderTableHead DataHeader={HeaderData} /> */}
 				<tr>
-					{DataLang.map((data) => (
-						<th className={`${data.title === 'Actions'}'text-center'`}>
+					{DataLang.map((data, index) => (
+						<th key={index} className={`${data.title === 'Actions'}'text-center'`}>
 							{data.title}
 						</th>
 					))}

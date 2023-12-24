@@ -1,10 +1,10 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { PersonalPapersHeader } from '../../../../DummyData/DummyData';
 import TableCompanyBody from './TableCompanyBody';
+import { PersonalPapersHeader } from '../../../DummyData/DummyData';
 
-const TableCompanyPaper = ({ type }) => {
+const TableCompanyPaper = () => {
 	const { t, i18n } = useTranslation();
 
 	const DataLang = PersonalPapersHeader.map((data) => {
@@ -28,7 +28,7 @@ const TableCompanyPaper = ({ type }) => {
 			</thead>
 
 			<tbody className="table-body">
-				<TableCompanyBody type={type} />
+				<TableCompanyBody />
 			</tbody>
 		</Table>
 	);

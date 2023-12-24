@@ -57,12 +57,13 @@ export const AdminSidebarData = [
 			'/servicesadmindashboard',
 			'/servicesadmindashboard',
 			// '/addnewservicesadmindashboard',
+			'/chat',
 		],
-		data: ['Unread', 'Ongoing', 'All Services'], //, 'Add New Services'
-		dataAr: ['غير مقروء', ' جاري', 'جميع الخدمات'], //, 'اضافه خدمه جديده'
+		data: ['Unread', 'Ongoing', 'All Services', 'chat'], //, 'Add New Services'
+		dataAr: ['غير مقروء', ' جاري', 'جميع الخدمات', 'الدردشة'], //, 'اضافه خدمه جديده'
 	},
 	{
-		id: 23,
+		id: 24,
 		title: 'Our Services',
 		titleAr: 'خدماتنا',
 		path: ['/showOurservicesadmindashboard', '/addnewservicesadmindashboard'],
@@ -394,9 +395,9 @@ export const UserSidebarData = [
 		id: 32,
 		title: 'Services',
 		titleAr: 'الخدمات',
-		path: ['/addnewserviesuser', '/servicesuserdashboard', '/servicesuserdashboard'],
-		data: ['Request New Service', 'Ongoing', 'All Services'],
-		dataAr: ['طلب خدمة جديدة', 'جارٍ', 'كل الخدمات'],
+		path: ['/addnewserviesuser', '/servicesuserdashboard', '/servicesuserdashboard','/chat'],
+		data: ['Request New Service', 'Ongoing', 'All Services','Chat'],
+		dataAr: ['طلب خدمة جديدة', 'جارٍ', 'كل الخدمات', 'الدردشة'],
 	},
 	{
 		id: 33,

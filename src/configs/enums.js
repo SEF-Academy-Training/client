@@ -15,9 +15,9 @@ export const enum_ServiceCategory = [
 	'training workshops',
 	'investment & incorporation',
 ];
-export const enum_ServiceStatus = ['pending', 'ongoing',  'completed'];
+export const enum_ServiceStatus = ['pending', 'ongoing', 'completed'];
 
-export const enum_paperStatus = ['valid', 'not valid'];
+export const enum_paperStatus = ['unread', 'valid', 'not valid'];
 export const enum_PaperTypes = ['personal', 'company'];
 export const enum_PaperDocs = [
 	//personal papers
@@ -35,16 +35,16 @@ export const enum_PaperDocs = [
 
 export const PaperDocs = [
 	//personal papers
-	{ hash: 1110, type: 'personal', title: 'personal ID' },
-	{ hash: 1112, type: 'personal', title: 'commercial register' },
-	{ hash: 1113, type: 'personal', title: 'tax card' },
-	{ hash: 1114, type: 'personal', title: 'establishment contract' },
+	{ hash: 1110, type: 'personal', document: 'personal ID' },
+	{ hash: 1112, type: 'personal', document: 'commercial register' },
+	{ hash: 1113, type: 'personal', document: 'tax card' },
+	{ hash: 1114, type: 'personal', document: 'establishment contract' },
 	// company papers
-	{ hash: 1115, type: 'company', title: 'VAT' },
-	{ hash: 1116, type: 'company', title: 'withhold tax' },
-	{ hash: 1117, type: 'company', title: 'payroll tax' },
-	{ hash: 1118, type: 'company', title: 'annual income' },
-	{ hash: 1119, type: 'company', title: 'annual balance' },
+	{ hash: 1115, type: 'company', document: 'VAT' },
+	{ hash: 1116, type: 'company', document: 'withhold tax' },
+	{ hash: 1117, type: 'company', document: 'payroll tax' },
+	{ hash: 1118, type: 'company', document: 'annual income' },
+	{ hash: 1119, type: 'company', document: 'annual balance' },
 ];
 
 export const ourServices = [

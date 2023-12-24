@@ -36,6 +36,7 @@ import EditUserAdmin from './Components/AdminDashboard/UserAdminDashboard/EditUs
 import ServicesAdminDashboard from './Components/AdminDashboard/ServicesAdminDashboard/AllServices/ServicesAdminDashboard';
 import AddServicesAdminDashboard from './Components/AdminDashboard/ServicesAdminDashboard/AddNewServices/AddNewServices';
 import AddNewServiesAdmin from './Components/AdminDashboard/ServicesAdminDashboard/AddNewServiesUser';
+import PapersAdmin from './Components/AdminDashboard/PapersAdmin/CompanyPapersUser';
 
 // import { ThemeProvider } from 'react-bootstrap';
 // eos
@@ -118,7 +119,9 @@ function App() {
         {login && userRole === 'Admin' && <Route path="/addnewservicesadmindashboard" element={<AddServicesAdminDashboard type = 'new'/>} />}
         {login && userRole === 'Admin' && <Route path="/editourservicesadmindashboard/:id" element={<AddServicesAdminDashboard type = 'edit' />} />}
         {login && userRole === 'Admin' && <Route path="/showOurservicesadmindashboard" element={< AddNewServiesAdmin />} />}
-        {login && userRole === 'Admin' && <Route path="/showpapersdmindashboard" element={< PersonalPapersUser />} />}
+        
+        {login && userRole === 'Admin' && <Route path="/showpapersdmindashboard" element={< PapersAdmin />} />}
+        {/* {login && userRole === 'Admin' && <Route path="/showpapersdmindashboard" element={< PersonalPapersUser />} />} */}
 
         {login && userRole === 'Admin' && <Route path="/blogsadmindashboard" element={<BlogsAdminDashboard />} />}
         {login && userRole === 'Admin' && <Route path="/addnewblogsadmindashboard" element={<AddNewBlogAdmin />} />}
@@ -128,8 +131,9 @@ function App() {
 
         {/* ------------------------- User Dashboard -----------------------------------------*/}
         {login && userRole === 'User' && <Route path="/servicesuserdashboard" element={<ServicesUserDashboard />} />}
-        {login && userRole === 'User' && <Route path="/personalpapersuser" element={< PersonalPapersUser />} />}
-        {login && userRole === 'User' && <Route path="/companypapersuser" element={<CompanyPapersUser />} />}
+        {/* {login && userRole === 'User' && <Route path="/personalpapersuser" element={< PersonalPapersUser />} />} */}
+        {login && userRole === 'User' && <Route path="/personalpapersuser" element={<CompanyPapersUser type='personal' />} />}
+        {login && userRole === 'User' && <Route path="/companypapersuser" element={<CompanyPapersUser type='company' />} />}
         {login && userRole === 'User' && <Route path="/addnewserviesuser" element={< AddNewServiesUser />} />}
         {login && userRole === 'User' && <Route path="/viewpapers" element={< ViewPapers />} />}
 

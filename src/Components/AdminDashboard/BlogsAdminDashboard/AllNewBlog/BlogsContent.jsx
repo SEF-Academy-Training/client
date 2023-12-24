@@ -72,8 +72,8 @@ const BlogsContent = () => {
 	});
 
 	DataLang.sort((a, b) => {
-		const titleA = a.title.toUpperCase();
-		const titleB = b.title.toUpperCase();
+		const titleA = a.title?.toUpperCase();
+		const titleB = b.title?.toUpperCase();
 
 		if (sortData === 'asc') {
 			return titleA.localeCompare(titleB);

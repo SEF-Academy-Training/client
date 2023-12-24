@@ -28,7 +28,7 @@ const DashboardHeader = ({ pageTitle, display }) => {
 	return (
 		<Row className="mt-3  bg-transparent" style={{ width: '94%', marginLeft: '30px' }}>
 			<Col sm={5}>
-				<h3 className="pt-4 mb-0 ps-4">{pageTitle}</h3>
+				<h3 className="pt-4 mb-0 ps-4 text-capitalize">{pageTitle}</h3>
 			</Col>
 
 			<Col sm={2} className={`mb-0 ${display ? display : ''} `}>

@@ -5,9 +5,9 @@ import { FaUpload } from 'react-icons/fa';
 import defultImg from '../../../../assest/images/Vector.svg'
 
 const AddService = () => {
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
     const imageInput = useRef();
-    const [selectedCategories, setSelectedCategories] = useState([]);
 
     const handleImageChange = () => {
         imageInput.current.click();
